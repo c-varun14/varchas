@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -11,7 +11,7 @@ enum DEPARTMENTNAME {
   AE
   AIML
   AS
-  C_CYCLE  @map("C-Cycle")
+  C_CYCLE  @map("C-CYCLE")
   CG
   CH
   CSE
@@ -23,38 +23,44 @@ enum DEPARTMENTNAME {
   IIOT
   ISE
   ME
-  P_CYCLE  @map("P-Cycle")
+  P_CYCLE  @map("P-CYCLE")
   VLSI
 }
 
 
-model DEPARTMENT {
+model department {
   name DEPARTMENTNAME @id
-  points Points[]
+  scores Score[]
 }
 
 enum SPORTS{
   BADMINTON
   FOOTBALL
   BASKETBALL
-  KHO_KHO @map("KHO-KHO")
+  KHO_KHO
   KABBADI
   VOLLEYBALL
-  TABLE_TENNIS @map("TABLE TENNIS")
-  CHESS @map("CHESS")
-  CARROM @map("CARROM")
+  TABLE_TENNIS
+  CHESS 
+  CARROM
   THROWBALL
-  BOX_CRICKET @map("BOX CRICKET")
+  BOX_CRICKET
 }
 
-model SPORT_EVENT {
+enum Gender {
+  MALE
+  FEMALE
+}
+model Sport_event {
   id String @id @default(cuid())
   name SPORTS
-  gender String
-  points Points[]
+  solo Boolean @default(false)
+  additional_data_name String
+  gender Gender
+  scores Score[]
 }
 
-model Points {
+model Score {
   id String @id @default(cuid())
   event_id String
   department_id DEPARTMENTNAME
@@ -63,12 +69,12 @@ model Points {
   losses Int @default(0)
   draws Int @default(0)
   points Int @default(0)
-  metadata Json? // For any additional data
+  additional_data Json? 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  event SPORT_EVENT @relation(fields: [event_id], references: [id])
-  department DEPARTMENT @relation(fields: [department_id], references: [name])
+  event Sport_event @relation(fields: [event_id], references: [id])
+  department department @relation(fields: [department_id], references: [name])
 
   @@unique([event_id, department_id])
 }

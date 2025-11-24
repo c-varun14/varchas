@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,_#ffffff,_#e0e6ff_60%,_#f4f1ff)]">
+          <div className="absolute inset-x-0 top-[-40%] h-[70%] w-full max-w-4xl translate-x-1/2 rounded-full bg-linear-to-r from-[#d6b6ff]/40 to-[#9ec8ff]/50 blur-3xl opacity-70 sm:left-1/2"></div>
+
+          <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-16 pt-10">
+            <Navbar />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

@@ -1,15 +1,22 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useState } from "react";
 
-const navLinks = [
-  "Home",
-  "Sports Events",
-  "Cultural Events",
-  "Leaderboard",
-  "Gallery",
-  "Contact",
+interface NavLink {
+  name: string;
+  path: string;
+  isExternal?: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { name: "Home", path: "/" },
+  { name: "Sports Events", path: "/sports" },
+  { name: "Cultural Events", path: "/cultural" },
+  { name: "Leaderboard", path: "#leaderboard", isExternal: true },
+  // { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -61,22 +68,31 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden flex-1 flex-wrap items-center justify-center gap-4 text-sm font-medium sm:flex">
           {navLinks.map((link) => (
-            <button
-              key={link}
+            <Link
+              href={link.path}
+              key={link.name}
               className={`rounded-full px-3.5 py-1 transition-colors ${
-                link === "Home"
+                link.path === "/"
                   ? "bg-white text-primary shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
+              target={link.isExternal ? "_blank" : undefined}
+              rel={link.isExternal ? "noopener noreferrer" : undefined}
             >
-              {link}
-            </button>
+              {link.name}
+            </Link>
           ))}
         </nav>
 
-        <Button className="hidden rounded-full bg-linear-to-r from-primary to-indigo-500 px-5 text-base shadow-lg shadow-primary/40 sm:block">
+        <Link
+          href="#leaderboard"
+          className={cn(
+            buttonVariants({ variant: "default" }),
+            "hidden rounded-full bg-linear-to-r from-primary to-indigo-500 px-5 text-base shadow-lg shadow-primary/40 sm:block"
+          )}
+        >
           View Full Results
-        </Button>
+        </Link>
       </div>
 
       {/* Mobile Navigation */}
@@ -84,20 +100,30 @@ const Navbar = () => {
         <div className="absolute left-0 right-0 z-50 mt-2 rounded-2xl border border-white/40 bg-white/90 p-4 shadow-lg backdrop-blur sm:hidden">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
-              <button
-                key={link}
+              <Link
+                href={link.path}
+                key={link.name}
                 className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors ${
-                  link === "Home"
+                  link.path === "/"
                     ? "bg-indigo-50 text-primary"
                     : "text-foreground hover:bg-gray-50"
                 }`}
+                target={link.isExternal ? "_blank" : undefined}
+                rel={link.isExternal ? "noopener noreferrer" : undefined}
+                onClick={() => setIsMenuOpen(false)}
               >
-                {link}
-              </button>
+                {link.name}
+              </Link>
             ))}
-            <Button className="w-full rounded-full bg-linear-to-r from-primary to-indigo-500 py-3 text-base shadow-lg shadow-primary/40">
+            <Link
+              href="#leaderboard"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "w-full rounded-full bg-linear-to-r from-primary to-indigo-500 py-3 text-base shadow-lg shadow-primary/40"
+              )}
+            >
               View Full Results
-            </Button>
+            </Link>
           </div>
         </div>
       )}
