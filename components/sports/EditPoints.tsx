@@ -1,0 +1,251 @@
+"use client";
+
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  DEPARTMENTNAME as DEPARTMENT_VALUES,
+  type DEPARTMENTNAME,
+} from "@/app/generated/prisma/enums";
+import PointsTable, { type DepartmentScore } from "./PointsTable";
+
+type DepartmentId = DEPARTMENTNAME;
+
+const DEPARTMENTS: DepartmentId[] = Object.values(
+  DEPARTMENT_VALUES
+) as DepartmentId[];
+
+type FormState = {
+  wins: number;
+  losses: number;
+  draws: number;
+  points: number;
+  additionalDataValue: number;
+};
+
+const DEFAULT_FORM_STATE: FormState = {
+  wins: 0,
+  losses: 0,
+  draws: 0,
+  points: 0,
+  additionalDataValue: 0,
+};
+
+type PointsTableProps = {
+  sportsId: string;
+  initialScores: DepartmentScore[];
+};
+
+export default function EditPoints({
+  sportsId,
+  initialScores,
+}: PointsTableProps) {
+  const [scores, setScores] = useState<DepartmentScore[]>(initialScores);
+  const [selectedDept, setSelectedDept] = useState<DepartmentId | "">("");
+  const [formData, setFormData] = useState(DEFAULT_FORM_STATE);
+  const [additionalDataName, setAdditionalDataName] = useState<
+    string | undefined
+  >(initialScores[0].additional_data?.name);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleDepartmentChange = (departmentId: DepartmentId) => {
+    setSelectedDept(departmentId);
+    setError(null);
+
+    const departmentScore = scores.find(
+      (score) => score.department_id === departmentId
+    );
+
+    setFormData({
+      wins: departmentScore?.wins ?? 0,
+      losses: departmentScore?.losses ?? 0,
+      draws: departmentScore?.draws ?? 0,
+      points: departmentScore?.points ?? 0,
+      additionalDataValue: departmentScore?.additional_data?.value ?? 0,
+    });
+    setAdditionalDataName(departmentScore?.additional_data?.name ?? "");
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!selectedDept) {
+      setError("Please select a department");
+      return;
+    }
+
+    setIsSaving(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/admin/sports/${sportsId}/scores`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          department_id: selectedDept,
+          wins: formData.wins,
+          losses: formData.losses,
+          draws: formData.draws,
+          points: formData.points,
+          additional_data_value: formData.additionalDataValue,
+          additional_data_name: additionalDataName,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update scores");
+      }
+
+      const updatedScores: DepartmentScore[] = await response.json();
+      setScores(updatedScores);
+      setFormData(DEFAULT_FORM_STATE);
+      setSelectedDept("");
+      setAdditionalDataName("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update scores");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const isFormDisabled = !selectedDept;
+
+  return (
+    <>
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+
+      <div className="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4">Update Department Scores</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="department">Department</Label>
+              <Select
+                value={selectedDept}
+                onValueChange={handleDepartmentChange}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select department" />
+                </SelectTrigger>
+                <SelectContent>
+                  {DEPARTMENTS.map((dept) => (
+                    <SelectItem key={dept} value={dept}>
+                      {dept}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {!selectedDept && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  Select a department to load its current record.
+                </p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="wins">Wins</Label>
+              <Input
+                type="number"
+                id="wins"
+                value={formData.wins}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    wins: parseInt(event.target.value) || 0,
+                  })
+                }
+                min="0"
+                disabled={isFormDisabled}
+              />
+            </div>
+            <div>
+              <Label htmlFor="losses">Losses</Label>
+              <Input
+                type="number"
+                id="losses"
+                value={formData.losses}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    losses: parseInt(event.target.value) || 0,
+                  })
+                }
+                min="0"
+                disabled={isFormDisabled}
+              />
+            </div>
+            <div>
+              <Label htmlFor="draws">Draws</Label>
+              <Input
+                type="number"
+                id="draws"
+                value={formData.draws}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    draws: parseInt(event.target.value) || 0,
+                  })
+                }
+                min="0"
+                disabled={isFormDisabled}
+              />
+            </div>
+            <div>
+              <Label htmlFor="points">Points</Label>
+              <Input
+                type="number"
+                id="points"
+                value={formData.points}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    points: parseInt(event.target.value) || 0,
+                  })
+                }
+                min="0"
+                disabled={isFormDisabled}
+              />
+            </div>
+            <div>
+              <Label htmlFor="additional-data">
+                {additionalDataName || "Additional data"}
+              </Label>
+              <Input
+                type="number"
+                id="additional-data"
+                value={formData.additionalDataValue}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    additionalDataValue: parseInt(event.target.value) || 0,
+                  })
+                }
+                min="0"
+                disabled={isFormDisabled}
+              />
+            </div>
+          </div>
+          <Button type="submit" disabled={isSaving || isFormDisabled}>
+            {isSaving ? "Updating..." : "Update Scores"}
+          </Button>
+        </form>
+      </div>
+      <PointsTable scores={scores} />
+    </>
+  );
+}
