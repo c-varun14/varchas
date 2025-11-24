@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DEPARTMENTNAME {
+  AE
+  AIML
+  AS
+  C_CYCLE  @map("C-Cycle")
+  CG
+  CH
+  CSE
+  CV
+  DSE
+  ECE
+  ECE_ACT  @map("ECE-ACT")
+  EEE
+  IIOT
+  ISE
+  ME
+  P_CYCLE  @map("P-Cycle")
+  VLSI
+}
+
+
+model DEPARTMENT {
+  name DEPARTMENTNAME @id
+  points Points[]
+}
+
+enum SPORTS{
+  BADMINTON
+  FOOTBALL
+  BASKETBALL
+  KHO_KHO @map("KHO-KHO")
+  KABBADI
+  VOLLEYBALL
+  TABLE_TENNIS @map("TABLE TENNIS")
+  CHESS @map("CHESS")
+  CARROM @map("CARROM")
+  THROWBALL
+  BOX_CRICKET @map("BOX CRICKET")
+}
+
+model SPORT_EVENT {
+  id String @id @default(cuid())
+  name SPORTS
+  gender String
+  points Points[]
+}
+
+model Points {
+  id String @id @default(cuid())
+  event_id String
+  department_id DEPARTMENTNAME
+  matches Int @default(0)
+  wins Int @default(0)
+  losses Int @default(0)
+  draws Int @default(0)
+  points Int @default(0)
+  metadata Json? // For any additional data
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event SPORT_EVENT @relation(fields: [event_id], references: [id])
+  department DEPARTMENT @relation(fields: [department_id], references: [name])
+
+  @@unique([event_id, department_id])
+}

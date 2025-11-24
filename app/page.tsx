@@ -1,65 +1,96 @@
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+const leftImages = [
+  "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1502810190503-830027b6c59b?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=400&q=80",
+];
+
+const rightImages = [
+  "https://images.unsplash.com/photo-1454922915609-78549ad709bb?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1431068799455-80bae0caf685?auto=format&fit=crop&w=400&q=80",
+  "https://images.unsplash.com/photo-1435224654926-ecc9f7fa028c?auto=format&fit=crop&w=400&q=80",
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,_#ffffff,_#e0e6ff_60%,_#f4f1ff)]">
+      <div className="absolute inset-x-0 top-[-40%] h-[70%] w-full max-w-4xl translate-x-1/2 rounded-full bg-linear-to-r from-[#d6b6ff]/40 to-[#9ec8ff]/50 blur-3xl opacity-70 sm:left-1/2"></div>
+
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-16 pt-10">
+        <Navbar />
+
+        <main className="relative grid items-center gap-8 rounded-[2.5rem] px-6 py-10 lg:grid-cols-[auto_1fr_auto]">
+          <ImageRail images={leftImages} align="left" />
+
+          <div className="flex flex-col items-center gap-6 text-center lg:px-16">
+            <Badge className="rounded-full bg-linear-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-sm text-white shadow-xl shadow-orange-300/40">
+              ✨ Championship 2025
+            </Badge>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-500">
+                MVJ College
+              </p>
+              <h1 className="mt-2 text-4xl font-semibold text-foreground sm:text-5xl">
+                Inter-Department Championship
+              </h1>
+            </div>
+            <div className="flex items-center gap-4 rounded-full bg-secondary/70 px-3 py-2 text-sm font-medium text-secondary-foreground">
+              <span className="flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-primary">
+                🏅 Sports
+              </span>
+              <span className="text-muted-foreground">+</span>
+              <span className="flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-pink-500">
+                🎵 Cultural
+              </span>
+            </div>
+            {/* <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+              Join us in celebrating excellence, talent, and teamwork as
+              departments compete across sports and cultural events. Experience
+              the energy, witness the passion, and be part of the ultimate
+              college championship!
+            </p> */}
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Button className="rounded-full bg-linear-to-r from-blue-500 to-indigo-500 px-8 py-6 text-base shadow-lg shadow-blue-400/50">
+                🏆 View Sports Events
+              </Button>
+              <Button className="rounded-full bg-linear-to-r from-pink-500 to-purple-500 px-8 py-6 text-base text-white shadow-lg shadow-pink-400/50">
+                🎭 View Cultural Events
+              </Button>
+            </div>
+          </div>
+
+          <ImageRail images={rightImages} align="right" />
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function ImageRail({
+  images,
+  align,
+}: {
+  images: string[];
+  align: "left" | "right";
+}) {
+  const alignmentClass = align === "left" ? "items-start" : "items-end";
+
+  return (
+    <div className={`hidden flex-col ${alignmentClass} gap-4 lg:flex`}>
+      {images.map((src) => (
+        <div
+          key={src}
+          className="overflow-hidden rounded-[1.25rem] border border-white/40 bg-white/60 shadow-lg shadow-indigo-200/60"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt="Event" className="h-28 w-28 object-cover" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      ))}
     </div>
   );
 }
