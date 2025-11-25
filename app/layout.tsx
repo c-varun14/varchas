@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     "The official website of Varchas 2025. Varchas is the annual inter-department sports and cultural competition of MVJCE.",
 };
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{

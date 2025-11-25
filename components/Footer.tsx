@@ -7,7 +7,7 @@ export function Footer() {
         <p className="text-center text-sm text-gray-600">
           Website built by{" "}
           <Link
-            href="https://webbywasp.com"
+            href="https://www.linkedin.com/in/c-varun/"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-indigo-600 transition-colors hover:text-indigo-700 hover:underline"

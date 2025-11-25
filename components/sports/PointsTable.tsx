@@ -30,8 +30,6 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
   const sortedScores = [...scores].sort((a, b) => {
     if (b.points !== a.points) return b.points - a.points;
     if (b.wins !== a.wins) return b.wins - a.wins;
-    if (a.losses !== b.losses) return a.losses - b.losses;
-
     const aValue = a.additional_data?.value ?? Number.NEGATIVE_INFINITY;
     const bValue = b.additional_data?.value ?? Number.NEGATIVE_INFINITY;
     return bValue - aValue;
