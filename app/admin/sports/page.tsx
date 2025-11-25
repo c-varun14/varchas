@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { AlertCircle, Loader2, Eye, Trash2, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type SportEvent = {
   id: string;
@@ -28,11 +29,6 @@ type SportEvent = {
   gender: string;
   additional_data_name: string;
   solo: boolean;
-};
-
-type SportOption = {
-  label: string;
-  value: string;
 };
 
 export default function SportsAdminPage() {
@@ -100,20 +96,6 @@ export default function SportsAdminPage() {
     }
   };
 
-  const sportOptions: SportOption[] = [
-    { label: "Badminton", value: "BADMINTON" },
-    { label: "Football", value: "FOOTBALL" },
-    { label: "Basketball", value: "BASKETBALL" },
-    { label: "Kho Kho", value: "KHO_KHO" },
-    { label: "Kabbadi", value: "KABBADI" },
-    { label: "Volleyball", value: "VOLLEYBALL" },
-    { label: "Table Tennis", value: "TABLE_TENNIS" },
-    { label: "Chess", value: "CHESS" },
-    { label: "Carrom", value: "CARROM" },
-    { label: "Throwball", value: "THROWBALL" },
-    { label: "Box Cricket", value: "BOX_CRICKET" },
-  ];
-
   return (
     <div className="container mx-auto p-4 md:p-6 max-w-7xl">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
@@ -153,23 +135,16 @@ export default function SportsAdminPage() {
               >
                 Sport
               </Label>
-              <Select
+              <Input
+                id="sport"
+                placeholder="Enter sport name"
                 value={newSport.name}
-                onValueChange={(value) =>
-                  setNewSport({ ...newSport, name: value })
+                onChange={(e) =>
+                  setNewSport({ ...newSport, name: e.target.value })
                 }
-              >
-                <SelectTrigger className="h-10">
-                  <SelectValue placeholder="Select a sport" />
-                </SelectTrigger>
-                <SelectContent>
-                  {sportOptions.map((sport) => (
-                    <SelectItem key={sport.value} value={sport.value}>
-                      {sport.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                className="h-10"
+                autoComplete="off"
+              />
             </div>
 
             <div className="space-y-2">
@@ -204,7 +179,7 @@ export default function SportsAdminPage() {
               </Label>
               <Input
                 id="additionalDataName"
-                placeholder="e.g. Player Name, Team Name, etc."
+                placeholder="e.g. SD, Average"
                 value={newSport.additional_data_name}
                 onChange={(e) =>
                   setNewSport({
@@ -321,21 +296,27 @@ export default function SportsAdminPage() {
                   </div>
                 </CardContent>
                 <CardFooter className="bg-gray-50 dark:bg-gray-800/50 p-3 border-t border-gray-100 dark:border-gray-700">
-                  <div className="flex justify-between w-full space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                      asChild
+                  <div className="flex flex-col justify-between w-full space-x-2">
+                    <Link
+                      href={`/admin/sports/${sport.id}/points`}
+                      className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "flex items-center justify-center"
+                      )}
                     >
-                      <Link
-                        href={`/admin/sports/${sport.id}`}
-                        className="flex items-center justify-center"
-                      >
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
-                      </Link>
-                    </Button>
+                      <Eye className="h-4 w-4 mr-2" />
+                      Edit leaderboard
+                    </Link>
+                    <Link
+                      href={`/admin/sports/${sport.id}/fixtures`}
+                      className={cn(
+                        buttonVariants({ variant: "default" }),
+                        "flex items-center justify-center mt-2"
+                      )}
+                    >
+                      <Eye className="h-4 w-4 mr-2" />
+                      Edit fixtures
+                    </Link>
                   </div>
                 </CardFooter>
               </Card>

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { DEPARTMENTNAME } from "@/app/generated/prisma/client";
+import { verifyAdmin } from "@/app/utils/VerifyAdmin";
 
 export async function GET() {
   try {
@@ -20,33 +21,27 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const { name, gender, additional_data_name, solo } = await request.json();
+    const isAuthorized = await verifyAdmin("sports");
+    if (!isAuthorized)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const body = await request.json();
+    const gender = typeof body?.gender === "string" ? body.gender : "";
+    const additional_data_name =
+      typeof body?.additional_data_name === "string"
+        ? body.additional_data_name.trim()
+        : "";
+    const solo = Boolean(body?.solo);
 
-    if (!name || !gender) {
+    if (!body.name || !gender || !additional_data_name) {
       return NextResponse.json(
-        { error: "Name and gender are required" },
-        { status: 400 }
-      );
-    }
-
-    // Check if sport with same name and gender already exists
-    const existingSport = await prisma.sport_event.findFirst({
-      where: {
-        name: name,
-        gender: gender,
-      },
-    });
-
-    if (existingSport) {
-      return NextResponse.json(
-        { error: "This sport with the selected gender already exists" },
+        { error: "Name, gender and deciding factor are required" },
         { status: 400 }
       );
     }
 
     const sport = await prisma.sport_event.create({
       data: {
-        name: name,
+        name: body.name,
         gender: gender,
         additional_data_name,
         solo,
@@ -56,7 +51,9 @@ export async function POST(request: Request) {
     // Create points entries for all departments
     const departments = await prisma.department.findMany();
 
-    await Promise.all(
+    console.log(departments);
+
+    const result = await Promise.all(
       departments.map((dept: { name: DEPARTMENTNAME }) =>
         prisma.score.create({
           data: {
@@ -75,6 +72,8 @@ export async function POST(request: Request) {
         })
       )
     );
+
+    console.log(result);
 
     return NextResponse.json(sport, { status: 201 });
   } catch (error) {

@@ -2,6 +2,7 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -15,7 +16,7 @@ const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
   { name: "Sports Events", path: "/sports" },
   { name: "Cultural Events", path: "/cultural" },
-  { name: "Leaderboard", path: "#leaderboard", isExternal: true },
+  // { name: "Leaderboard", path: "#leaderboard", isExternal: true },
   // { name: "Contact", path: "/contact" },
 ];
 
@@ -23,16 +24,20 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="relative">
+    <header className="fixed inset-x-0 top-6 z-50 mx-auto w-full max-w-[calc(100%-3rem)] sm:max-w-[calc(100%-4rem)] lg:max-w-6xl">
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-full border border-white/40 bg-white/70 px-4 py-3 shadow-lg shadow-primary/5 backdrop-blur sm:px-6 sm:py-4">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-indigo-500 text-primary-foreground shadow-lg sm:size-12">
-            🏆
-          </div>
-          <div className="hidden sm:block">
+          <Image
+            src={"/mvjLogo.webp"}
+            alt="MVJ Logo"
+            width={100}
+            height={100}
+            className="sm:ml-4"
+          />
+          {/* <div className="hidden sm:block">
             <p className="text-lg font-semibold text-foreground">MVJ College</p>
             <p className="text-sm text-muted-foreground">Championship 2025</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile menu button */}
@@ -71,11 +76,7 @@ const Navbar = () => {
             <Link
               href={link.path}
               key={link.name}
-              className={`rounded-full px-3.5 py-1 transition-colors ${
-                link.path === "/"
-                  ? "bg-white text-primary shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              className={`rounded-full px-3.5 py-1 transition-colors text-muted-foreground hover:text-foreground`}
               target={link.isExternal ? "_blank" : undefined}
               rel={link.isExternal ? "noopener noreferrer" : undefined}
             >
@@ -85,13 +86,13 @@ const Navbar = () => {
         </nav>
 
         <Link
-          href="#leaderboard"
+          href="/#leaderboard"
           className={cn(
             buttonVariants({ variant: "default" }),
-            "hidden rounded-full bg-linear-to-r from-primary to-indigo-500 px-5 text-base shadow-lg shadow-primary/40 sm:block"
+            "hidden rounded-full bg-linear-to-r from-primary to-indigo-500 sm:block px-6"
           )}
         >
-          View Full Results
+          View Leaderboard
         </Link>
       </div>
 
@@ -103,11 +104,7 @@ const Navbar = () => {
               <Link
                 href={link.path}
                 key={link.name}
-                className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors ${
-                  link.path === "/"
-                    ? "bg-indigo-50 text-primary"
-                    : "text-foreground hover:bg-gray-50"
-                }`}
+                className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors text-foreground hover:bg-gray-50`}
                 target={link.isExternal ? "_blank" : undefined}
                 rel={link.isExternal ? "noopener noreferrer" : undefined}
                 onClick={() => setIsMenuOpen(false)}
@@ -116,13 +113,13 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="#leaderboard"
+              href="/#leaderboard"
               className={cn(
                 buttonVariants({ variant: "default" }),
                 "w-full rounded-full bg-linear-to-r from-primary to-indigo-500 py-3 text-base shadow-lg shadow-primary/40"
               )}
             >
-              View Full Results
+              View Leaderboard
             </Link>
           </div>
         </div>

@@ -32,23 +32,6 @@ export const DEPARTMENTNAME = {
 export type DEPARTMENTNAME = (typeof DEPARTMENTNAME)[keyof typeof DEPARTMENTNAME]
 
 
-export const SPORTS = {
-  BADMINTON: 'BADMINTON',
-  FOOTBALL: 'FOOTBALL',
-  BASKETBALL: 'BASKETBALL',
-  KHO_KHO: 'KHO_KHO',
-  KABBADI: 'KABBADI',
-  VOLLEYBALL: 'VOLLEYBALL',
-  TABLE_TENNIS: 'TABLE_TENNIS',
-  CHESS: 'CHESS',
-  CARROM: 'CARROM',
-  THROWBALL: 'THROWBALL',
-  BOX_CRICKET: 'BOX_CRICKET'
-} as const
-
-export type SPORTS = (typeof SPORTS)[keyof typeof SPORTS]
-
-
 export const Gender = {
   MALE: 'MALE',
   FEMALE: 'FEMALE'

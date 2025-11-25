@@ -217,7 +217,6 @@ export default function EditPoints({
                     points: parseInt(event.target.value) || 0,
                   })
                 }
-                min="0"
                 disabled={isFormDisabled}
               />
             </div>

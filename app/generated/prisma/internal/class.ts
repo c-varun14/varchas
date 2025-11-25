@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.0",
   "engineVersion": "0c19ccc313cf9911a90d99d2ac2eb0280c76c513",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum DEPARTMENTNAME {\n  AE\n  AIML\n  AS\n  C_CYCLE @map(\"C-CYCLE\")\n  CG\n  CH\n  CSE\n  CV\n  DSE\n  ECE\n  ECE_ACT @map(\"ECE-ACT\")\n  EEE\n  IIOT\n  ISE\n  ME\n  P_CYCLE @map(\"P-CYCLE\")\n  VLSI\n}\n\nmodel department {\n  name   DEPARTMENTNAME @id\n  scores Score[]\n}\n\nenum SPORTS {\n  BADMINTON\n  FOOTBALL\n  BASKETBALL\n  KHO_KHO\n  KABBADI\n  VOLLEYBALL\n  TABLE_TENNIS\n  CHESS\n  CARROM\n  THROWBALL\n  BOX_CRICKET\n}\n\nenum Gender {\n  MALE\n  FEMALE\n}\n\nmodel Sport_event {\n  id                   String  @id @default(cuid())\n  name                 SPORTS\n  solo                 Boolean @default(false)\n  additional_data_name String\n  gender               Gender\n  scores               Score[]\n}\n\nmodel Score {\n  id              String         @id @default(cuid())\n  event_id        String\n  department_id   DEPARTMENTNAME\n  matches         Int            @default(0)\n  wins            Int            @default(0)\n  losses          Int            @default(0)\n  draws           Int            @default(0)\n  points          Int            @default(0)\n  additional_data Json?\n  createdAt       DateTime       @default(now())\n  updatedAt       DateTime       @updatedAt\n\n  event      Sport_event @relation(fields: [event_id], references: [id])\n  department department  @relation(fields: [department_id], references: [name])\n\n  @@unique([event_id, department_id])\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum DEPARTMENTNAME {\n  AE\n  AIML\n  AS\n  C_CYCLE @map(\"C-CYCLE\")\n  CG\n  CH\n  CSE\n  CV\n  DSE\n  ECE\n  ECE_ACT @map(\"ECE-ACT\")\n  EEE\n  IIOT\n  ISE\n  ME\n  P_CYCLE @map(\"P-CYCLE\")\n  VLSI\n}\n\nmodel department {\n  name   DEPARTMENTNAME @id\n  scores Score[]\n}\n\nenum Gender {\n  MALE\n  FEMALE\n}\n\nmodel Sport_event {\n  id                   String    @id @default(cuid())\n  name                 String\n  solo                 Boolean   @default(false)\n  additional_data_name String\n  gender               Gender\n  scores               Score[]\n  fixtures             fixture[]\n}\n\nmodel Score {\n  id              String         @id @default(cuid())\n  event_id        String\n  department_id   DEPARTMENTNAME\n  matches         Int            @default(0)\n  wins            Int            @default(0)\n  losses          Int            @default(0)\n  draws           Int            @default(0)\n  points          Int            @default(0)\n  additional_data Json?\n  createdAt       DateTime       @default(now())\n  updatedAt       DateTime       @updatedAt\n\n  event      Sport_event @relation(fields: [event_id], references: [id])\n  department department  @relation(fields: [department_id], references: [name])\n\n  @@unique([event_id, department_id])\n}\n\nmodel fixture {\n  id           String         @id @default(cuid())\n  event_id     String\n  department_1 DEPARTMENTNAME\n  department_2 DEPARTMENTNAME\n  start_time   DateTime\n  end_time     DateTime\n  score        String\n  createdAt    DateTime       @default(now())\n  updatedAt    DateTime       @updatedAt\n\n  event Sport_event @relation(fields: [event_id], references: [id])\n}\n\nmodel User {\n  id            String    @id\n  name          String\n  email         String\n  emailVerified Boolean   @default(false)\n  image         String?\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  sessions      Session[]\n  accounts      Account[]\n\n  @@unique([email])\n  @@map(\"user\")\n}\n\nmodel Session {\n  id        String   @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@index([userId])\n  @@map(\"session\")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n\n  @@index([userId])\n  @@map(\"account\")\n}\n\nmodel Verification {\n  id         String   @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  @@index([identifier])\n  @@map(\"verification\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"department\":{\"fields\":[{\"name\":\"name\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"scores\",\"kind\":\"object\",\"type\":\"Score\",\"relationName\":\"ScoreTodepartment\"}],\"dbName\":null},\"Sport_event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"enum\",\"type\":\"SPORTS\"},{\"name\":\"solo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"additional_data_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"enum\",\"type\":\"Gender\"},{\"name\":\"scores\",\"kind\":\"object\",\"type\":\"Score\",\"relationName\":\"ScoreToSport_event\"}],\"dbName\":null},\"Score\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department_id\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"matches\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"wins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"losses\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"draws\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"points\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"additional_data\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Sport_event\",\"relationName\":\"ScoreToSport_event\"},{\"name\":\"department\",\"kind\":\"object\",\"type\":\"department\",\"relationName\":\"ScoreTodepartment\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"department\":{\"fields\":[{\"name\":\"name\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"scores\",\"kind\":\"object\",\"type\":\"Score\",\"relationName\":\"ScoreTodepartment\"}],\"dbName\":null},\"Sport_event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"solo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"additional_data_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"enum\",\"type\":\"Gender\"},{\"name\":\"scores\",\"kind\":\"object\",\"type\":\"Score\",\"relationName\":\"ScoreToSport_event\"},{\"name\":\"fixtures\",\"kind\":\"object\",\"type\":\"fixture\",\"relationName\":\"Sport_eventTofixture\"}],\"dbName\":null},\"Score\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department_id\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"matches\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"wins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"losses\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"draws\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"points\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"additional_data\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Sport_event\",\"relationName\":\"ScoreToSport_event\"},{\"name\":\"department\",\"kind\":\"object\",\"type\":\"department\",\"relationName\":\"ScoreTodepartment\"}],\"dbName\":null},\"fixture\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department_1\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"department_2\",\"kind\":\"enum\",\"type\":\"DEPARTMENTNAME\"},{\"name\":\"start_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"end_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Sport_event\",\"relationName\":\"Sport_eventTofixture\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"}],\"dbName\":\"user\"},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ipAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userAgent\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":\"session\"},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"},{\"name\":\"accessToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refreshToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"idToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accessTokenExpiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"refreshTokenExpiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"account\"},\"Verification\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"verification\"}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -203,6 +203,56 @@ export interface PrismaClient<
     * ```
     */
   get score(): Prisma.ScoreDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.fixture`: Exposes CRUD operations for the **fixture** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Fixtures
+    * const fixtures = await prisma.fixture.findMany()
+    * ```
+    */
+  get fixture(): Prisma.fixtureDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.session`: Exposes CRUD operations for the **Session** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.session.findMany()
+    * ```
+    */
+  get session(): Prisma.SessionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.account`: Exposes CRUD operations for the **Account** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Accounts
+    * const accounts = await prisma.account.findMany()
+    * ```
+    */
+  get account(): Prisma.AccountDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.verification`: Exposes CRUD operations for the **Verification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Verifications
+    * const verifications = await prisma.verification.findMany()
+    * ```
+    */
+  get verification(): Prisma.VerificationDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

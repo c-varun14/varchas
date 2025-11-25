@@ -26,7 +26,7 @@ export type AggregateSport_event = {
 
 export type Sport_eventMinAggregateOutputType = {
   id: string | null
-  name: $Enums.SPORTS | null
+  name: string | null
   solo: boolean | null
   additional_data_name: string | null
   gender: $Enums.Gender | null
@@ -34,7 +34,7 @@ export type Sport_eventMinAggregateOutputType = {
 
 export type Sport_eventMaxAggregateOutputType = {
   id: string | null
-  name: $Enums.SPORTS | null
+  name: string | null
   solo: boolean | null
   additional_data_name: string | null
   gender: $Enums.Gender | null
@@ -149,7 +149,7 @@ export type Sport_eventGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type Sport_eventGroupByOutputType = {
   id: string
-  name: $Enums.SPORTS
+  name: string
   solo: boolean
   additional_data_name: string
   gender: $Enums.Gender
@@ -178,11 +178,12 @@ export type Sport_eventWhereInput = {
   OR?: Prisma.Sport_eventWhereInput[]
   NOT?: Prisma.Sport_eventWhereInput | Prisma.Sport_eventWhereInput[]
   id?: Prisma.StringFilter<"Sport_event"> | string
-  name?: Prisma.EnumSPORTSFilter<"Sport_event"> | $Enums.SPORTS
+  name?: Prisma.StringFilter<"Sport_event"> | string
   solo?: Prisma.BoolFilter<"Sport_event"> | boolean
   additional_data_name?: Prisma.StringFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderFilter<"Sport_event"> | $Enums.Gender
   scores?: Prisma.ScoreListRelationFilter
+  fixtures?: Prisma.FixtureListRelationFilter
 }
 
 export type Sport_eventOrderByWithRelationInput = {
@@ -192,6 +193,7 @@ export type Sport_eventOrderByWithRelationInput = {
   additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   scores?: Prisma.ScoreOrderByRelationAggregateInput
+  fixtures?: Prisma.fixtureOrderByRelationAggregateInput
 }
 
 export type Sport_eventWhereUniqueInput = Prisma.AtLeast<{
@@ -199,11 +201,12 @@ export type Sport_eventWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.Sport_eventWhereInput | Prisma.Sport_eventWhereInput[]
   OR?: Prisma.Sport_eventWhereInput[]
   NOT?: Prisma.Sport_eventWhereInput | Prisma.Sport_eventWhereInput[]
-  name?: Prisma.EnumSPORTSFilter<"Sport_event"> | $Enums.SPORTS
+  name?: Prisma.StringFilter<"Sport_event"> | string
   solo?: Prisma.BoolFilter<"Sport_event"> | boolean
   additional_data_name?: Prisma.StringFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderFilter<"Sport_event"> | $Enums.Gender
   scores?: Prisma.ScoreListRelationFilter
+  fixtures?: Prisma.FixtureListRelationFilter
 }, "id">
 
 export type Sport_eventOrderByWithAggregationInput = {
@@ -222,7 +225,7 @@ export type Sport_eventScalarWhereWithAggregatesInput = {
   OR?: Prisma.Sport_eventScalarWhereWithAggregatesInput[]
   NOT?: Prisma.Sport_eventScalarWhereWithAggregatesInput | Prisma.Sport_eventScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
-  name?: Prisma.EnumSPORTSWithAggregatesFilter<"Sport_event"> | $Enums.SPORTS
+  name?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
   solo?: Prisma.BoolWithAggregatesFilter<"Sport_event"> | boolean
   additional_data_name?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderWithAggregatesFilter<"Sport_event"> | $Enums.Gender
@@ -230,43 +233,47 @@ export type Sport_eventScalarWhereWithAggregatesInput = {
 
 export type Sport_eventCreateInput = {
   id?: string
-  name: $Enums.SPORTS
+  name: string
   solo?: boolean
   additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreCreateNestedManyWithoutEventInput
+  fixtures?: Prisma.fixtureCreateNestedManyWithoutEventInput
 }
 
 export type Sport_eventUncheckedCreateInput = {
   id?: string
-  name: $Enums.SPORTS
+  name: string
   solo?: boolean
   additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutEventInput
+  fixtures?: Prisma.fixtureUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type Sport_eventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUpdateManyWithoutEventNestedInput
+  fixtures?: Prisma.fixtureUpdateManyWithoutEventNestedInput
 }
 
 export type Sport_eventUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutEventNestedInput
+  fixtures?: Prisma.fixtureUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type Sport_eventCreateManyInput = {
   id?: string
-  name: $Enums.SPORTS
+  name: string
   solo?: boolean
   additional_data_name: string
   gender: $Enums.Gender
@@ -274,7 +281,7 @@ export type Sport_eventCreateManyInput = {
 
 export type Sport_eventUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
@@ -282,7 +289,7 @@ export type Sport_eventUpdateManyMutationInput = {
 
 export type Sport_eventUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
@@ -321,10 +328,6 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type EnumSPORTSFieldUpdateOperationsInput = {
-  set?: $Enums.SPORTS
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -347,20 +350,36 @@ export type Sport_eventUpdateOneRequiredWithoutScoresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.Sport_eventUpdateToOneWithWhereWithoutScoresInput, Prisma.Sport_eventUpdateWithoutScoresInput>, Prisma.Sport_eventUncheckedUpdateWithoutScoresInput>
 }
 
+export type Sport_eventCreateNestedOneWithoutFixturesInput = {
+  create?: Prisma.XOR<Prisma.Sport_eventCreateWithoutFixturesInput, Prisma.Sport_eventUncheckedCreateWithoutFixturesInput>
+  connectOrCreate?: Prisma.Sport_eventCreateOrConnectWithoutFixturesInput
+  connect?: Prisma.Sport_eventWhereUniqueInput
+}
+
+export type Sport_eventUpdateOneRequiredWithoutFixturesNestedInput = {
+  create?: Prisma.XOR<Prisma.Sport_eventCreateWithoutFixturesInput, Prisma.Sport_eventUncheckedCreateWithoutFixturesInput>
+  connectOrCreate?: Prisma.Sport_eventCreateOrConnectWithoutFixturesInput
+  upsert?: Prisma.Sport_eventUpsertWithoutFixturesInput
+  connect?: Prisma.Sport_eventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.Sport_eventUpdateToOneWithWhereWithoutFixturesInput, Prisma.Sport_eventUpdateWithoutFixturesInput>, Prisma.Sport_eventUncheckedUpdateWithoutFixturesInput>
+}
+
 export type Sport_eventCreateWithoutScoresInput = {
   id?: string
-  name: $Enums.SPORTS
+  name: string
   solo?: boolean
   additional_data_name: string
   gender: $Enums.Gender
+  fixtures?: Prisma.fixtureCreateNestedManyWithoutEventInput
 }
 
 export type Sport_eventUncheckedCreateWithoutScoresInput = {
   id?: string
-  name: $Enums.SPORTS
+  name: string
   solo?: boolean
   additional_data_name: string
   gender: $Enums.Gender
+  fixtures?: Prisma.fixtureUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type Sport_eventCreateOrConnectWithoutScoresInput = {
@@ -381,18 +400,72 @@ export type Sport_eventUpdateToOneWithWhereWithoutScoresInput = {
 
 export type Sport_eventUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  fixtures?: Prisma.fixtureUpdateManyWithoutEventNestedInput
 }
 
 export type Sport_eventUncheckedUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.EnumSPORTSFieldUpdateOperationsInput | $Enums.SPORTS
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  fixtures?: Prisma.fixtureUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type Sport_eventCreateWithoutFixturesInput = {
+  id?: string
+  name: string
+  solo?: boolean
+  additional_data_name: string
+  gender: $Enums.Gender
+  scores?: Prisma.ScoreCreateNestedManyWithoutEventInput
+}
+
+export type Sport_eventUncheckedCreateWithoutFixturesInput = {
+  id?: string
+  name: string
+  solo?: boolean
+  additional_data_name: string
+  gender: $Enums.Gender
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type Sport_eventCreateOrConnectWithoutFixturesInput = {
+  where: Prisma.Sport_eventWhereUniqueInput
+  create: Prisma.XOR<Prisma.Sport_eventCreateWithoutFixturesInput, Prisma.Sport_eventUncheckedCreateWithoutFixturesInput>
+}
+
+export type Sport_eventUpsertWithoutFixturesInput = {
+  update: Prisma.XOR<Prisma.Sport_eventUpdateWithoutFixturesInput, Prisma.Sport_eventUncheckedUpdateWithoutFixturesInput>
+  create: Prisma.XOR<Prisma.Sport_eventCreateWithoutFixturesInput, Prisma.Sport_eventUncheckedCreateWithoutFixturesInput>
+  where?: Prisma.Sport_eventWhereInput
+}
+
+export type Sport_eventUpdateToOneWithWhereWithoutFixturesInput = {
+  where?: Prisma.Sport_eventWhereInput
+  data: Prisma.XOR<Prisma.Sport_eventUpdateWithoutFixturesInput, Prisma.Sport_eventUncheckedUpdateWithoutFixturesInput>
+}
+
+export type Sport_eventUpdateWithoutFixturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  scores?: Prisma.ScoreUpdateManyWithoutEventNestedInput
+}
+
+export type Sport_eventUncheckedUpdateWithoutFixturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutEventNestedInput
 }
 
 
@@ -402,10 +475,12 @@ export type Sport_eventUncheckedUpdateWithoutScoresInput = {
 
 export type Sport_eventCountOutputType = {
   scores: number
+  fixtures: number
 }
 
 export type Sport_eventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | Sport_eventCountOutputTypeCountScoresArgs
+  fixtures?: boolean | Sport_eventCountOutputTypeCountFixturesArgs
 }
 
 /**
@@ -425,6 +500,13 @@ export type Sport_eventCountOutputTypeCountScoresArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ScoreWhereInput
 }
 
+/**
+ * Sport_eventCountOutputType without action
+ */
+export type Sport_eventCountOutputTypeCountFixturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.fixtureWhereInput
+}
+
 
 export type Sport_eventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -433,6 +515,7 @@ export type Sport_eventSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   additional_data_name?: boolean
   gender?: boolean
   scores?: boolean | Prisma.Sport_event$scoresArgs<ExtArgs>
+  fixtures?: boolean | Prisma.Sport_event$fixturesArgs<ExtArgs>
   _count?: boolean | Prisma.Sport_eventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sport_event"]>
 
@@ -463,6 +546,7 @@ export type Sport_eventSelectScalar = {
 export type Sport_eventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "solo" | "additional_data_name" | "gender", ExtArgs["result"]["sport_event"]>
 export type Sport_eventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | Prisma.Sport_event$scoresArgs<ExtArgs>
+  fixtures?: boolean | Prisma.Sport_event$fixturesArgs<ExtArgs>
   _count?: boolean | Prisma.Sport_eventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type Sport_eventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -472,10 +556,11 @@ export type $Sport_eventPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Sport_event"
   objects: {
     scores: Prisma.$ScorePayload<ExtArgs>[]
+    fixtures: Prisma.$fixturePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: $Enums.SPORTS
+    name: string
     solo: boolean
     additional_data_name: string
     gender: $Enums.Gender
@@ -874,6 +959,7 @@ readonly fields: Sport_eventFieldRefs;
 export interface Prisma__Sport_eventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   scores<T extends Prisma.Sport_event$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sport_event$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fixtures<T extends Prisma.Sport_event$fixturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sport_event$fixturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$fixturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -904,7 +990,7 @@ export interface Prisma__Sport_eventClient<T, Null = never, ExtArgs extends runt
  */
 export interface Sport_eventFieldRefs {
   readonly id: Prisma.FieldRef<"Sport_event", 'String'>
-  readonly name: Prisma.FieldRef<"Sport_event", 'SPORTS'>
+  readonly name: Prisma.FieldRef<"Sport_event", 'String'>
   readonly solo: Prisma.FieldRef<"Sport_event", 'Boolean'>
   readonly additional_data_name: Prisma.FieldRef<"Sport_event", 'String'>
   readonly gender: Prisma.FieldRef<"Sport_event", 'Gender'>
@@ -1317,6 +1403,30 @@ export type Sport_event$scoresArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ScoreScalarFieldEnum | Prisma.ScoreScalarFieldEnum[]
+}
+
+/**
+ * Sport_event.fixtures
+ */
+export type Sport_event$fixturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the fixture
+   */
+  select?: Prisma.fixtureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the fixture
+   */
+  omit?: Prisma.fixtureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.fixtureInclude<ExtArgs> | null
+  where?: Prisma.fixtureWhereInput
+  orderBy?: Prisma.fixtureOrderByWithRelationInput | Prisma.fixtureOrderByWithRelationInput[]
+  cursor?: Prisma.fixtureWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FixtureScalarFieldEnum | Prisma.FixtureScalarFieldEnum[]
 }
 
 /**

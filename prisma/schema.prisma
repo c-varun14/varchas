@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -11,70 +12,134 @@ enum DEPARTMENTNAME {
   AE
   AIML
   AS
-  C_CYCLE  @map("C-CYCLE")
+  C_CYCLE @map("C-CYCLE")
   CG
   CH
   CSE
   CV
   DSE
   ECE
-  ECE_ACT  @map("ECE-ACT")
+  ECE_ACT @map("ECE-ACT")
   EEE
   IIOT
   ISE
   ME
-  P_CYCLE  @map("P-CYCLE")
+  P_CYCLE @map("P-CYCLE")
   VLSI
 }
 
-
 model department {
-  name DEPARTMENTNAME @id
+  name   DEPARTMENTNAME @id
   scores Score[]
-}
-
-enum SPORTS{
-  BADMINTON
-  FOOTBALL
-  BASKETBALL
-  KHO_KHO
-  KABBADI
-  VOLLEYBALL
-  TABLE_TENNIS
-  CHESS 
-  CARROM
-  THROWBALL
-  BOX_CRICKET
 }
 
 enum Gender {
   MALE
   FEMALE
 }
+
 model Sport_event {
-  id String @id @default(cuid())
-  name SPORTS
-  solo Boolean @default(false)
+  id                   String    @id @default(cuid())
+  name                 String
+  solo                 Boolean   @default(false)
   additional_data_name String
-  gender Gender
-  scores Score[]
+  gender               Gender
+  scores               Score[]
+  fixtures             fixture[]
 }
 
 model Score {
-  id String @id @default(cuid())
-  event_id String
-  department_id DEPARTMENTNAME
-  matches Int @default(0)
-  wins Int @default(0)
-  losses Int @default(0)
-  draws Int @default(0)
-  points Int @default(0)
-  additional_data Json? 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String         @id @default(cuid())
+  event_id        String
+  department_id   DEPARTMENTNAME
+  matches         Int            @default(0)
+  wins            Int            @default(0)
+  losses          Int            @default(0)
+  draws           Int            @default(0)
+  points          Int            @default(0)
+  additional_data Json?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
-  event Sport_event @relation(fields: [event_id], references: [id])
-  department department @relation(fields: [department_id], references: [name])
+  event      Sport_event @relation(fields: [event_id], references: [id])
+  department department  @relation(fields: [department_id], references: [name])
 
   @@unique([event_id, department_id])
+}
+
+model fixture {
+  id           String         @id @default(cuid())
+  event_id     String
+  department_1 DEPARTMENTNAME
+  department_2 DEPARTMENTNAME
+  start_time   DateTime
+  end_time     DateTime
+  score        String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  event Sport_event @relation(fields: [event_id], references: [id])
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }

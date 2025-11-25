@@ -5,6 +5,7 @@ import {
   DEPARTMENTNAME as DEPARTMENT_VALUES,
   type DEPARTMENTNAME,
 } from "@/app/generated/prisma/enums";
+import { verifyAdmin } from "@/app/utils/VerifyAdmin";
 
 const DEPARTMENT_IDS = Object.values(DEPARTMENT_VALUES) as DEPARTMENTNAME[];
 
@@ -39,6 +40,9 @@ export async function POST(
   }
 ) {
   try {
+    const isAuthorized = await verifyAdmin("sports");
+    if (!isAuthorized)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     const body = await request.json();
     const { sportsId } = await params;
     const department_id_raw = (body as Record<string, unknown>)[

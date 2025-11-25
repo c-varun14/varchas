@@ -1,5 +1,7 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const leftImages = [
   "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=400&q=80", // Sports
@@ -72,12 +74,24 @@ const HeroSection = () => {
               college championship!
             </p> */}
         <div className="flex flex-col gap-4 sm:flex-row">
-          <Button className="rounded-full bg-linear-to-r from-blue-500 to-indigo-500 px-8 py-6 text-base shadow-lg shadow-blue-400/50">
+          <Link
+            href="/sports"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "rounded-full bg-linear-to-r from-blue-500 to-indigo-500 px-8 py-6 text-base shadow-lg shadow-blue-400/50"
+            )}
+          >
             🏆 View Sports Events
-          </Button>
-          <Button className="rounded-full bg-linear-to-r from-pink-500 to-purple-500 px-8 py-6 text-base text-white shadow-lg shadow-pink-400/50">
+          </Link>
+          <Link
+            href="/cultural"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "rounded-full bg-linear-to-r from-pink-500 to-purple-500 px-8 py-6 text-base text-white shadow-lg shadow-pink-400/50"
+            )}
+          >
             🎭 View Cultural Events
-          </Button>
+          </Link>
         </div>
       </div>
 
