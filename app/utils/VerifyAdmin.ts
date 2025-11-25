@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 
 const culturalAdmins = ["varun1492006@gmail.com"];
 
-const sportsAdmin = ["varun1492006@gmail.com", "shashanknm9535@gmail.com"];
+const sportsAdmin = ["varun1492006@gmail.com", "shashanknm9535@gmail.com", "suryaprakashcpsuryaprakashcp@gmail.com"];
 
 export const verifyAdmin = async (adminOf: "cultural" | "sports") => {
   const data = await auth.api.getSession({
