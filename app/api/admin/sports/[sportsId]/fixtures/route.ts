@@ -1,19 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import {
-  DEPARTMENTNAME as DEPARTMENT_VALUES,
-  type DEPARTMENTNAME,
-} from "@/app/generated/prisma/enums";
 import type { Prisma } from "@/app/generated/prisma/client";
 import { verifyAdmin } from "@/app/utils/VerifyAdmin";
 
-const DEPARTMENTS = Object.values(DEPARTMENT_VALUES) as DEPARTMENTNAME[];
 const fixtureDelegate = prisma.fixture as Prisma.fixtureDelegate;
-
-const isDepartment = (value: unknown): value is DEPARTMENTNAME => {
-  if (typeof value !== "string") return false;
-  return DEPARTMENTS.includes(value as DEPARTMENTNAME);
-};
 
 const parseDate = (value: unknown): Date | null => {
   if (typeof value !== "string" && typeof value !== "number") return null;
@@ -23,15 +13,6 @@ const parseDate = (value: unknown): Date | null => {
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });
-
-const ensureDifferentDepartments = (
-  dept1: DEPARTMENTNAME,
-  dept2: DEPARTMENTNAME
-) => {
-  if (dept1 === dept2) {
-    throw new Error("Departments must be different");
-  }
-};
 
 export async function GET(
   _request: Request,
@@ -71,17 +52,15 @@ export async function POST(
     const { sportsId } = await params;
     const body = (await request.json()) as Record<string, unknown>;
 
-    const department_1 = body["department_1"];
-    const department_2 = body["department_2"];
+    const department_1 = String(body["department_1"]);
+    const department_2 = String(body["department_2"]);
     const start_time_raw = body["start_time"];
     const end_time_raw = body["end_time"];
     const score_raw = body["score"];
 
-    if (!isDepartment(department_1) || !isDepartment(department_2)) {
-      return formatError("Both departments must be valid");
+    if (!(department_1 && department_2)) {
+      return formatError("A valid department must be provided");
     }
-
-    ensureDifferentDepartments(department_1, department_2);
 
     const start_time = parseDate(start_time_raw);
     if (!start_time) {
@@ -145,16 +124,10 @@ export async function PATCH(
     const updateData: Record<string, unknown> = {};
 
     if (body["department_1"] !== undefined) {
-      if (!isDepartment(body["department_1"])) {
-        return formatError("department_1 must be a valid department");
-      }
       updateData.department_1 = body["department_1"];
     }
 
     if (body["department_2"] !== undefined) {
-      if (!isDepartment(body["department_2"])) {
-        return formatError("department_2 must be a valid department");
-      }
       updateData.department_2 = body["department_2"];
     }
 

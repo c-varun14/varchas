@@ -70,8 +70,8 @@ model Score {
 model fixture {
   id           String         @id @default(cuid())
   event_id     String
-  department_1 DEPARTMENTNAME
-  department_2 DEPARTMENTNAME
+  department_1 String
+  department_2 String
   start_time   DateTime
   end_time     DateTime
   score        String

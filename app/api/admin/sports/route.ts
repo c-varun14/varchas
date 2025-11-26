@@ -51,8 +51,6 @@ export async function POST(request: Request) {
     // Create points entries for all departments
     const departments = await prisma.department.findMany();
 
-    console.log(departments);
-
     const result = await Promise.all(
       departments.map((dept: { name: DEPARTMENTNAME }) =>
         prisma.score.create({
@@ -72,8 +70,6 @@ export async function POST(request: Request) {
         })
       )
     );
-
-    console.log(result);
 
     return NextResponse.json(sport, { status: 201 });
   } catch (error) {

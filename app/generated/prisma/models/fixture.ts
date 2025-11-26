@@ -27,8 +27,8 @@ export type AggregateFixture = {
 export type FixtureMinAggregateOutputType = {
   id: string | null
   event_id: string | null
-  department_1: $Enums.DEPARTMENTNAME | null
-  department_2: $Enums.DEPARTMENTNAME | null
+  department_1: string | null
+  department_2: string | null
   start_time: Date | null
   end_time: Date | null
   score: string | null
@@ -39,8 +39,8 @@ export type FixtureMinAggregateOutputType = {
 export type FixtureMaxAggregateOutputType = {
   id: string | null
   event_id: string | null
-  department_1: $Enums.DEPARTMENTNAME | null
-  department_2: $Enums.DEPARTMENTNAME | null
+  department_1: string | null
+  department_2: string | null
   start_time: Date | null
   end_time: Date | null
   score: string | null
@@ -174,8 +174,8 @@ export type fixtureGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type FixtureGroupByOutputType = {
   id: string
   event_id: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date
   end_time: Date
   score: string
@@ -207,8 +207,8 @@ export type fixtureWhereInput = {
   NOT?: Prisma.fixtureWhereInput | Prisma.fixtureWhereInput[]
   id?: Prisma.StringFilter<"fixture"> | string
   event_id?: Prisma.StringFilter<"fixture"> | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFilter<"fixture"> | string
+  department_2?: Prisma.StringFilter<"fixture"> | string
   start_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   end_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   score?: Prisma.StringFilter<"fixture"> | string
@@ -236,8 +236,8 @@ export type fixtureWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.fixtureWhereInput[]
   NOT?: Prisma.fixtureWhereInput | Prisma.fixtureWhereInput[]
   event_id?: Prisma.StringFilter<"fixture"> | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFilter<"fixture"> | string
+  department_2?: Prisma.StringFilter<"fixture"> | string
   start_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   end_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   score?: Prisma.StringFilter<"fixture"> | string
@@ -267,8 +267,8 @@ export type fixtureScalarWhereWithAggregatesInput = {
   NOT?: Prisma.fixtureScalarWhereWithAggregatesInput | Prisma.fixtureScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"fixture"> | string
   event_id?: Prisma.StringWithAggregatesFilter<"fixture"> | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEWithAggregatesFilter<"fixture"> | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEWithAggregatesFilter<"fixture"> | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringWithAggregatesFilter<"fixture"> | string
+  department_2?: Prisma.StringWithAggregatesFilter<"fixture"> | string
   start_time?: Prisma.DateTimeWithAggregatesFilter<"fixture"> | Date | string
   end_time?: Prisma.DateTimeWithAggregatesFilter<"fixture"> | Date | string
   score?: Prisma.StringWithAggregatesFilter<"fixture"> | string
@@ -278,8 +278,8 @@ export type fixtureScalarWhereWithAggregatesInput = {
 
 export type fixtureCreateInput = {
   id?: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -291,8 +291,8 @@ export type fixtureCreateInput = {
 export type fixtureUncheckedCreateInput = {
   id?: string
   event_id: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -302,8 +302,8 @@ export type fixtureUncheckedCreateInput = {
 
 export type fixtureUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -315,8 +315,8 @@ export type fixtureUpdateInput = {
 export type fixtureUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -327,8 +327,8 @@ export type fixtureUncheckedUpdateInput = {
 export type fixtureCreateManyInput = {
   id?: string
   event_id: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -338,8 +338,8 @@ export type fixtureCreateManyInput = {
 
 export type fixtureUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -350,8 +350,8 @@ export type fixtureUpdateManyMutationInput = {
 export type fixtureUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -449,8 +449,8 @@ export type fixtureUncheckedUpdateManyWithoutEventNestedInput = {
 
 export type fixtureCreateWithoutEventInput = {
   id?: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -460,8 +460,8 @@ export type fixtureCreateWithoutEventInput = {
 
 export type fixtureUncheckedCreateWithoutEventInput = {
   id?: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -501,8 +501,8 @@ export type fixtureScalarWhereInput = {
   NOT?: Prisma.fixtureScalarWhereInput | Prisma.fixtureScalarWhereInput[]
   id?: Prisma.StringFilter<"fixture"> | string
   event_id?: Prisma.StringFilter<"fixture"> | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFilter<"fixture"> | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFilter<"fixture"> | string
+  department_2?: Prisma.StringFilter<"fixture"> | string
   start_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   end_time?: Prisma.DateTimeFilter<"fixture"> | Date | string
   score?: Prisma.StringFilter<"fixture"> | string
@@ -512,8 +512,8 @@ export type fixtureScalarWhereInput = {
 
 export type fixtureCreateManyEventInput = {
   id?: string
-  department_1: $Enums.DEPARTMENTNAME
-  department_2: $Enums.DEPARTMENTNAME
+  department_1: string
+  department_2: string
   start_time: Date | string
   end_time: Date | string
   score: string
@@ -523,8 +523,8 @@ export type fixtureCreateManyEventInput = {
 
 export type fixtureUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -534,8 +534,8 @@ export type fixtureUpdateWithoutEventInput = {
 
 export type fixtureUncheckedUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -545,8 +545,8 @@ export type fixtureUncheckedUpdateWithoutEventInput = {
 
 export type fixtureUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_1?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
-  department_2?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_1?: Prisma.StringFieldUpdateOperationsInput | string
+  department_2?: Prisma.StringFieldUpdateOperationsInput | string
   start_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   score?: Prisma.StringFieldUpdateOperationsInput | string
@@ -626,8 +626,8 @@ export type $fixturePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     event_id: string
-    department_1: $Enums.DEPARTMENTNAME
-    department_2: $Enums.DEPARTMENTNAME
+    department_1: string
+    department_2: string
     start_time: Date
     end_time: Date
     score: string
@@ -1059,8 +1059,8 @@ export interface Prisma__fixtureClient<T, Null = never, ExtArgs extends runtime.
 export interface fixtureFieldRefs {
   readonly id: Prisma.FieldRef<"fixture", 'String'>
   readonly event_id: Prisma.FieldRef<"fixture", 'String'>
-  readonly department_1: Prisma.FieldRef<"fixture", 'DEPARTMENTNAME'>
-  readonly department_2: Prisma.FieldRef<"fixture", 'DEPARTMENTNAME'>
+  readonly department_1: Prisma.FieldRef<"fixture", 'String'>
+  readonly department_2: Prisma.FieldRef<"fixture", 'String'>
   readonly start_time: Prisma.FieldRef<"fixture", 'DateTime'>
   readonly end_time: Prisma.FieldRef<"fixture", 'DateTime'>
   readonly score: Prisma.FieldRef<"fixture", 'String'>

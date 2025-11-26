@@ -31,8 +31,8 @@ const DEPARTMENTS = Object.values(DEPARTMENT_VALUES) as DEPARTMENTNAME[];
 
 type FixtureDTO = {
   id: string;
-  department_1: DEPARTMENTNAME;
-  department_2: DEPARTMENTNAME;
+  department_1: string;
+  department_2: string;
   start_time: string;
   end_time: string;
   score: string;
@@ -41,8 +41,8 @@ type FixtureDTO = {
 type FixtureStatus = "pending" | "happening" | "completed";
 
 type FixtureFormState = {
-  department_1: DEPARTMENTNAME | "";
-  department_2: DEPARTMENTNAME | "";
+  department_1: string | "";
+  department_2: string | "";
   start_time: string;
   end_time: string;
   score: string;
@@ -306,46 +306,26 @@ export default function ManageFixtures({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Department 1</Label>
-              <Select
+              <Input
+                type="text"
                 value={formData.department_1}
-                onValueChange={(value: DEPARTMENTNAME) =>
-                  setFormData((prev) => ({ ...prev, department_1: value }))
+                onChange={(e) =>
+                  setFormData({ ...formData, department_1: e.target.value })
                 }
-                disabled={isFormDisabled}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select department" />
-                </SelectTrigger>
-                <SelectContent>
-                  {DEPARTMENTS.map((dept) => (
-                    <SelectItem key={dept} value={dept}>
-                      {dept}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                placeholder="Enter department name"
+              />
             </div>
 
             <div className="space-y-2">
               <Label>Department 2</Label>
-              <Select
+              <Input
+                type="text"
                 value={formData.department_2}
-                onValueChange={(value: DEPARTMENTNAME) =>
-                  setFormData((prev) => ({ ...prev, department_2: value }))
+                onChange={(e) =>
+                  setFormData({ ...formData, department_2: e.target.value })
                 }
-                disabled={isFormDisabled}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select opponent" />
-                </SelectTrigger>
-                <SelectContent>
-                  {DEPARTMENTS.map((dept) => (
-                    <SelectItem key={dept} value={dept}>
-                      {dept}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                placeholder="Enter department name"
+              />
             </div>
           </div>
 
@@ -363,7 +343,6 @@ export default function ManageFixtures({
                   }))
                 }
                 disabled={isFormDisabled}
-                min={toInputValue(new Date().toISOString())}
               />
             </div>
             <div className="space-y-2">
@@ -379,9 +358,7 @@ export default function ManageFixtures({
                   }))
                 }
                 disabled={isFormDisabled}
-                min={
-                  formData.start_time || toInputValue(new Date().toISOString())
-                }
+                min={formData.start_time}
               />
             </div>
           </div>

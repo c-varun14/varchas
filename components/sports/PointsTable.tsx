@@ -34,7 +34,6 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
     const bValue = b.additional_data?.value ?? Number.NEGATIVE_INFINITY;
     return bValue - aValue;
   });
-
   const rankedScores = sortedScores.reduce<
     { score: DepartmentScore; position: number; tieBreakKey: string }[]
   >((acc, score, index) => {
