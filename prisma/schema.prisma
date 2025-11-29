@@ -42,7 +42,6 @@ model Sport_event {
   id                   String    @id @default(cuid())
   name                 String
   solo                 Boolean   @default(false)
-  additional_data_name String
   gender               Gender
   scores               Score[]
   fixtures             fixture[]
@@ -57,7 +56,6 @@ model Score {
   losses          Int            @default(0)
   draws           Int            @default(0)
   points          Int            @default(0)
-  additional_data Json?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
@@ -142,4 +140,11 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Cultural { 
+  id           String         @id @default(cuid())
+  date_time DateTime
+  venue   String
+
 }

@@ -1,4 +1,3 @@
-// app/api/admin/sports/[sportId]/scores/route.ts
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import {
@@ -85,12 +84,6 @@ export async function POST(
         draws,
         matches,
         points,
-        additional_data: additional_data_name
-          ? {
-              name: additional_data_name,
-              value: additional_data_value,
-            }
-          : undefined,
       },
     });
 

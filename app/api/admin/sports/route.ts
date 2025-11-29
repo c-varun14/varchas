@@ -43,7 +43,6 @@ export async function POST(request: Request) {
       data: {
         name: body.name,
         gender: gender,
-        additional_data_name,
         solo,
       },
     });
@@ -62,10 +61,6 @@ export async function POST(request: Request) {
             losses: 0,
             draws: 0,
             points: 0,
-            additional_data: {
-              name: additional_data_name,
-              value: 0,
-            },
           },
         })
       )

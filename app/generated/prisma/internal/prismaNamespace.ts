@@ -391,7 +391,8 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Cultural: 'Cultural'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "department" | "sport_event" | "score" | "fixture" | "user" | "session" | "account" | "verification"
+    modelProps: "department" | "sport_event" | "score" | "fixture" | "user" | "session" | "account" | "verification" | "cultural"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1003,6 +1004,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Cultural: {
+      payload: Prisma.$CulturalPayload<ExtArgs>
+      fields: Prisma.CulturalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CulturalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CulturalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        findFirst: {
+          args: Prisma.CulturalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CulturalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        findMany: {
+          args: Prisma.CulturalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+        }
+        create: {
+          args: Prisma.CulturalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        createMany: {
+          args: Prisma.CulturalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CulturalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+        }
+        delete: {
+          args: Prisma.CulturalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        update: {
+          args: Prisma.CulturalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        deleteMany: {
+          args: Prisma.CulturalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CulturalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CulturalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+        }
+        upsert: {
+          args: Prisma.CulturalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+        }
+        aggregate: {
+          args: Prisma.CulturalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCultural>
+        }
+        groupBy: {
+          args: Prisma.CulturalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CulturalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1053,7 +1128,6 @@ export const Sport_eventScalarFieldEnum = {
   id: 'id',
   name: 'name',
   solo: 'solo',
-  additional_data_name: 'additional_data_name',
   gender: 'gender'
 } as const
 
@@ -1069,7 +1143,6 @@ export const ScoreScalarFieldEnum = {
   losses: 'losses',
   draws: 'draws',
   points: 'points',
-  additional_data: 'additional_data',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1150,6 +1223,15 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const CulturalScalarFieldEnum = {
+  id: 'id',
+  date_time: 'date_time',
+  venue: 'venue'
+} as const
+
+export type CulturalScalarFieldEnum = (typeof CulturalScalarFieldEnum)[keyof typeof CulturalScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1158,29 +1240,12 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const NullableJsonNullValueInput = {
-  DbNull: DbNull,
-  JsonNull: JsonNull
-} as const
-
-export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 export const NullsOrder = {
@@ -1257,20 +1322,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1388,6 +1439,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  cultural?: Prisma.CulturalOmit
 }
 
 /* Types for Logging */

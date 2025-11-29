@@ -40,14 +40,8 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
       losses: true,
       draws: true,
       points: true,
-      additional_data: true,
     },
   });
-
-  const firstAdditionalName =
-    rawScores
-      .map((score) => parseAdditionalData(score.additional_data).name)
-      .find((name): name is string => Boolean(name)) ?? "Additional Metric";
 
   const aggregated = new Map<
     DepartmentScore["department_id"],
@@ -63,7 +57,6 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
       draws: 0,
       matches: 0,
       points: 0,
-      additional_data: { name: firstAdditionalName, value: 0 },
     });
   });
 
@@ -71,17 +64,11 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
     const aggregate = aggregated.get(score.department_id);
     if (!aggregate) return;
 
-    const { value } = parseAdditionalData(score.additional_data);
-
     aggregate.wins += score.wins;
     aggregate.losses += score.losses;
     aggregate.draws += score.draws;
     aggregate.matches = aggregate.wins + aggregate.losses + aggregate.draws;
     aggregate.points += score.points;
-    aggregate.additional_data = {
-      name: firstAdditionalName,
-      value: (aggregate.additional_data?.value ?? 0) + value,
-    };
   });
 
   return Array.from(aggregated.values());

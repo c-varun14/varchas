@@ -77,7 +77,6 @@ export type ScoreCountAggregateOutputType = {
   losses: number
   draws: number
   points: number
-  additional_data: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -135,7 +134,6 @@ export type ScoreCountAggregateInputType = {
   losses?: true
   draws?: true
   points?: true
-  additional_data?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -236,7 +234,6 @@ export type ScoreGroupByOutputType = {
   losses: number
   draws: number
   points: number
-  additional_data: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: ScoreCountAggregateOutputType | null
@@ -273,7 +270,6 @@ export type ScoreWhereInput = {
   losses?: Prisma.IntFilter<"Score"> | number
   draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
-  additional_data?: Prisma.JsonNullableFilter<"Score">
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   event?: Prisma.XOR<Prisma.Sport_eventScalarRelationFilter, Prisma.Sport_eventWhereInput>
@@ -289,7 +285,6 @@ export type ScoreOrderByWithRelationInput = {
   losses?: Prisma.SortOrder
   draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
-  additional_data?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   event?: Prisma.Sport_eventOrderByWithRelationInput
@@ -309,7 +304,6 @@ export type ScoreWhereUniqueInput = Prisma.AtLeast<{
   losses?: Prisma.IntFilter<"Score"> | number
   draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
-  additional_data?: Prisma.JsonNullableFilter<"Score">
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   event?: Prisma.XOR<Prisma.Sport_eventScalarRelationFilter, Prisma.Sport_eventWhereInput>
@@ -325,7 +319,6 @@ export type ScoreOrderByWithAggregationInput = {
   losses?: Prisma.SortOrder
   draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
-  additional_data?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ScoreCountOrderByAggregateInput
@@ -347,7 +340,6 @@ export type ScoreScalarWhereWithAggregatesInput = {
   losses?: Prisma.IntWithAggregatesFilter<"Score"> | number
   draws?: Prisma.IntWithAggregatesFilter<"Score"> | number
   points?: Prisma.IntWithAggregatesFilter<"Score"> | number
-  additional_data?: Prisma.JsonNullableWithAggregatesFilter<"Score">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
 }
@@ -359,7 +351,6 @@ export type ScoreCreateInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   event: Prisma.Sport_eventCreateNestedOneWithoutScoresInput
@@ -375,7 +366,6 @@ export type ScoreUncheckedCreateInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -387,7 +377,6 @@ export type ScoreUpdateInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   event?: Prisma.Sport_eventUpdateOneRequiredWithoutScoresNestedInput
@@ -403,7 +392,6 @@ export type ScoreUncheckedUpdateInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -417,7 +405,6 @@ export type ScoreCreateManyInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -429,7 +416,6 @@ export type ScoreUpdateManyMutationInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -443,7 +429,6 @@ export type ScoreUncheckedUpdateManyInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -472,7 +457,6 @@ export type ScoreCountOrderByAggregateInput = {
   losses?: Prisma.SortOrder
   draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
-  additional_data?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -622,7 +606,6 @@ export type ScoreCreateWithoutDepartmentInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   event: Prisma.Sport_eventCreateNestedOneWithoutScoresInput
@@ -636,7 +619,6 @@ export type ScoreUncheckedCreateWithoutDepartmentInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -679,7 +661,6 @@ export type ScoreScalarWhereInput = {
   losses?: Prisma.IntFilter<"Score"> | number
   draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
-  additional_data?: Prisma.JsonNullableFilter<"Score">
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
 }
@@ -691,7 +672,6 @@ export type ScoreCreateWithoutEventInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   department: Prisma.departmentCreateNestedOneWithoutScoresInput
@@ -705,7 +685,6 @@ export type ScoreUncheckedCreateWithoutEventInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -744,7 +723,6 @@ export type ScoreCreateManyDepartmentInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -756,7 +734,6 @@ export type ScoreUpdateWithoutDepartmentInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   event?: Prisma.Sport_eventUpdateOneRequiredWithoutScoresNestedInput
@@ -770,7 +747,6 @@ export type ScoreUncheckedUpdateWithoutDepartmentInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -783,7 +759,6 @@ export type ScoreUncheckedUpdateManyWithoutDepartmentInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -796,7 +771,6 @@ export type ScoreCreateManyEventInput = {
   losses?: number
   draws?: number
   points?: number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -808,7 +782,6 @@ export type ScoreUpdateWithoutEventInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.departmentUpdateOneRequiredWithoutScoresNestedInput
@@ -822,7 +795,6 @@ export type ScoreUncheckedUpdateWithoutEventInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -835,7 +807,6 @@ export type ScoreUncheckedUpdateManyWithoutEventInput = {
   losses?: Prisma.IntFieldUpdateOperationsInput | number
   draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
-  additional_data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -851,7 +822,6 @@ export type ScoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   losses?: boolean
   draws?: boolean
   points?: boolean
-  additional_data?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   event?: boolean | Prisma.Sport_eventDefaultArgs<ExtArgs>
@@ -867,7 +837,6 @@ export type ScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   losses?: boolean
   draws?: boolean
   points?: boolean
-  additional_data?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   event?: boolean | Prisma.Sport_eventDefaultArgs<ExtArgs>
@@ -883,7 +852,6 @@ export type ScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   losses?: boolean
   draws?: boolean
   points?: boolean
-  additional_data?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   event?: boolean | Prisma.Sport_eventDefaultArgs<ExtArgs>
@@ -899,12 +867,11 @@ export type ScoreSelectScalar = {
   losses?: boolean
   draws?: boolean
   points?: boolean
-  additional_data?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "event_id" | "department_id" | "matches" | "wins" | "losses" | "draws" | "points" | "additional_data" | "createdAt" | "updatedAt", ExtArgs["result"]["score"]>
+export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "event_id" | "department_id" | "matches" | "wins" | "losses" | "draws" | "points" | "createdAt" | "updatedAt", ExtArgs["result"]["score"]>
 export type ScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   event?: boolean | Prisma.Sport_eventDefaultArgs<ExtArgs>
   department?: boolean | Prisma.departmentDefaultArgs<ExtArgs>
@@ -933,7 +900,6 @@ export type $ScorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     losses: number
     draws: number
     points: number
-    additional_data: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["score"]>
@@ -1369,7 +1335,6 @@ export interface ScoreFieldRefs {
   readonly losses: Prisma.FieldRef<"Score", 'Int'>
   readonly draws: Prisma.FieldRef<"Score", 'Int'>
   readonly points: Prisma.FieldRef<"Score", 'Int'>
-  readonly additional_data: Prisma.FieldRef<"Score", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Score", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Score", 'DateTime'>
 }

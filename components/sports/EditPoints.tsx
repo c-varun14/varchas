@@ -29,7 +29,6 @@ type FormState = {
   losses: number;
   draws: number;
   points: number;
-  additionalDataValue: number;
 };
 
 const DEFAULT_FORM_STATE: FormState = {
@@ -37,7 +36,6 @@ const DEFAULT_FORM_STATE: FormState = {
   losses: 0,
   draws: 0,
   points: 0,
-  additionalDataValue: 0,
 };
 
 type PointsTableProps = {
@@ -52,9 +50,6 @@ export default function EditPoints({
   const [scores, setScores] = useState<DepartmentScore[]>(initialScores);
   const [selectedDept, setSelectedDept] = useState<DepartmentId | "">("");
   const [formData, setFormData] = useState(DEFAULT_FORM_STATE);
-  const [additionalDataName, setAdditionalDataName] = useState<
-    string | undefined
-  >(initialScores[0].additional_data?.name);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,9 +66,7 @@ export default function EditPoints({
       losses: departmentScore?.losses ?? 0,
       draws: departmentScore?.draws ?? 0,
       points: departmentScore?.points ?? 0,
-      additionalDataValue: departmentScore?.additional_data?.value ?? 0,
     });
-    setAdditionalDataName(departmentScore?.additional_data?.name ?? "");
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -99,8 +92,6 @@ export default function EditPoints({
           losses: formData.losses,
           draws: formData.draws,
           points: formData.points,
-          additional_data_value: formData.additionalDataValue,
-          additional_data_name: additionalDataName,
         }),
       });
 
@@ -112,7 +103,6 @@ export default function EditPoints({
       setScores(updatedScores);
       setFormData(DEFAULT_FORM_STATE);
       setSelectedDept("");
-      setAdditionalDataName("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to update scores");
     } finally {
@@ -217,24 +207,6 @@ export default function EditPoints({
                     points: parseInt(event.target.value) || 0,
                   })
                 }
-                disabled={isFormDisabled}
-              />
-            </div>
-            <div>
-              <Label htmlFor="additional-data">
-                {additionalDataName || "Additional data"}
-              </Label>
-              <Input
-                type="number"
-                id="additional-data"
-                value={formData.additionalDataValue}
-                onChange={(event) =>
-                  setFormData({
-                    ...formData,
-                    additionalDataValue: parseInt(event.target.value) || 0,
-                  })
-                }
-                min="0"
                 disabled={isFormDisabled}
               />
             </div>

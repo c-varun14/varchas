@@ -28,7 +28,6 @@ export type Sport_eventMinAggregateOutputType = {
   id: string | null
   name: string | null
   solo: boolean | null
-  additional_data_name: string | null
   gender: $Enums.Gender | null
 }
 
@@ -36,7 +35,6 @@ export type Sport_eventMaxAggregateOutputType = {
   id: string | null
   name: string | null
   solo: boolean | null
-  additional_data_name: string | null
   gender: $Enums.Gender | null
 }
 
@@ -44,7 +42,6 @@ export type Sport_eventCountAggregateOutputType = {
   id: number
   name: number
   solo: number
-  additional_data_name: number
   gender: number
   _all: number
 }
@@ -54,7 +51,6 @@ export type Sport_eventMinAggregateInputType = {
   id?: true
   name?: true
   solo?: true
-  additional_data_name?: true
   gender?: true
 }
 
@@ -62,7 +58,6 @@ export type Sport_eventMaxAggregateInputType = {
   id?: true
   name?: true
   solo?: true
-  additional_data_name?: true
   gender?: true
 }
 
@@ -70,7 +65,6 @@ export type Sport_eventCountAggregateInputType = {
   id?: true
   name?: true
   solo?: true
-  additional_data_name?: true
   gender?: true
   _all?: true
 }
@@ -151,7 +145,6 @@ export type Sport_eventGroupByOutputType = {
   id: string
   name: string
   solo: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   _count: Sport_eventCountAggregateOutputType | null
   _min: Sport_eventMinAggregateOutputType | null
@@ -180,7 +173,6 @@ export type Sport_eventWhereInput = {
   id?: Prisma.StringFilter<"Sport_event"> | string
   name?: Prisma.StringFilter<"Sport_event"> | string
   solo?: Prisma.BoolFilter<"Sport_event"> | boolean
-  additional_data_name?: Prisma.StringFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderFilter<"Sport_event"> | $Enums.Gender
   scores?: Prisma.ScoreListRelationFilter
   fixtures?: Prisma.FixtureListRelationFilter
@@ -190,7 +182,6 @@ export type Sport_eventOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   solo?: Prisma.SortOrder
-  additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   scores?: Prisma.ScoreOrderByRelationAggregateInput
   fixtures?: Prisma.fixtureOrderByRelationAggregateInput
@@ -203,7 +194,6 @@ export type Sport_eventWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.Sport_eventWhereInput | Prisma.Sport_eventWhereInput[]
   name?: Prisma.StringFilter<"Sport_event"> | string
   solo?: Prisma.BoolFilter<"Sport_event"> | boolean
-  additional_data_name?: Prisma.StringFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderFilter<"Sport_event"> | $Enums.Gender
   scores?: Prisma.ScoreListRelationFilter
   fixtures?: Prisma.FixtureListRelationFilter
@@ -213,7 +203,6 @@ export type Sport_eventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   solo?: Prisma.SortOrder
-  additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   _count?: Prisma.Sport_eventCountOrderByAggregateInput
   _max?: Prisma.Sport_eventMaxOrderByAggregateInput
@@ -227,7 +216,6 @@ export type Sport_eventScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
   name?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
   solo?: Prisma.BoolWithAggregatesFilter<"Sport_event"> | boolean
-  additional_data_name?: Prisma.StringWithAggregatesFilter<"Sport_event"> | string
   gender?: Prisma.EnumGenderWithAggregatesFilter<"Sport_event"> | $Enums.Gender
 }
 
@@ -235,7 +223,6 @@ export type Sport_eventCreateInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreCreateNestedManyWithoutEventInput
   fixtures?: Prisma.fixtureCreateNestedManyWithoutEventInput
@@ -245,7 +232,6 @@ export type Sport_eventUncheckedCreateInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutEventInput
   fixtures?: Prisma.fixtureUncheckedCreateNestedManyWithoutEventInput
@@ -255,7 +241,6 @@ export type Sport_eventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUpdateManyWithoutEventNestedInput
   fixtures?: Prisma.fixtureUpdateManyWithoutEventNestedInput
@@ -265,7 +250,6 @@ export type Sport_eventUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutEventNestedInput
   fixtures?: Prisma.fixtureUncheckedUpdateManyWithoutEventNestedInput
@@ -275,7 +259,6 @@ export type Sport_eventCreateManyInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
 }
 
@@ -283,7 +266,6 @@ export type Sport_eventUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
 }
 
@@ -291,7 +273,6 @@ export type Sport_eventUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
 }
 
@@ -299,7 +280,6 @@ export type Sport_eventCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   solo?: Prisma.SortOrder
-  additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
 }
 
@@ -307,7 +287,6 @@ export type Sport_eventMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   solo?: Prisma.SortOrder
-  additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
 }
 
@@ -315,7 +294,6 @@ export type Sport_eventMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   solo?: Prisma.SortOrder
-  additional_data_name?: Prisma.SortOrder
   gender?: Prisma.SortOrder
 }
 
@@ -368,7 +346,6 @@ export type Sport_eventCreateWithoutScoresInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   fixtures?: Prisma.fixtureCreateNestedManyWithoutEventInput
 }
@@ -377,7 +354,6 @@ export type Sport_eventUncheckedCreateWithoutScoresInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   fixtures?: Prisma.fixtureUncheckedCreateNestedManyWithoutEventInput
 }
@@ -402,7 +378,6 @@ export type Sport_eventUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   fixtures?: Prisma.fixtureUpdateManyWithoutEventNestedInput
 }
@@ -411,7 +386,6 @@ export type Sport_eventUncheckedUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   fixtures?: Prisma.fixtureUncheckedUpdateManyWithoutEventNestedInput
 }
@@ -420,7 +394,6 @@ export type Sport_eventCreateWithoutFixturesInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreCreateNestedManyWithoutEventInput
 }
@@ -429,7 +402,6 @@ export type Sport_eventUncheckedCreateWithoutFixturesInput = {
   id?: string
   name: string
   solo?: boolean
-  additional_data_name: string
   gender: $Enums.Gender
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutEventInput
 }
@@ -454,7 +426,6 @@ export type Sport_eventUpdateWithoutFixturesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUpdateManyWithoutEventNestedInput
 }
@@ -463,7 +434,6 @@ export type Sport_eventUncheckedUpdateWithoutFixturesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   solo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  additional_data_name?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutEventNestedInput
 }
@@ -512,7 +482,6 @@ export type Sport_eventSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   name?: boolean
   solo?: boolean
-  additional_data_name?: boolean
   gender?: boolean
   scores?: boolean | Prisma.Sport_event$scoresArgs<ExtArgs>
   fixtures?: boolean | Prisma.Sport_event$fixturesArgs<ExtArgs>
@@ -523,7 +492,6 @@ export type Sport_eventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   name?: boolean
   solo?: boolean
-  additional_data_name?: boolean
   gender?: boolean
 }, ExtArgs["result"]["sport_event"]>
 
@@ -531,7 +499,6 @@ export type Sport_eventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   name?: boolean
   solo?: boolean
-  additional_data_name?: boolean
   gender?: boolean
 }, ExtArgs["result"]["sport_event"]>
 
@@ -539,11 +506,10 @@ export type Sport_eventSelectScalar = {
   id?: boolean
   name?: boolean
   solo?: boolean
-  additional_data_name?: boolean
   gender?: boolean
 }
 
-export type Sport_eventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "solo" | "additional_data_name" | "gender", ExtArgs["result"]["sport_event"]>
+export type Sport_eventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "solo" | "gender", ExtArgs["result"]["sport_event"]>
 export type Sport_eventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | Prisma.Sport_event$scoresArgs<ExtArgs>
   fixtures?: boolean | Prisma.Sport_event$fixturesArgs<ExtArgs>
@@ -562,7 +528,6 @@ export type $Sport_eventPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     name: string
     solo: boolean
-    additional_data_name: string
     gender: $Enums.Gender
   }, ExtArgs["result"]["sport_event"]>
   composites: {}
@@ -992,7 +957,6 @@ export interface Sport_eventFieldRefs {
   readonly id: Prisma.FieldRef<"Sport_event", 'String'>
   readonly name: Prisma.FieldRef<"Sport_event", 'String'>
   readonly solo: Prisma.FieldRef<"Sport_event", 'Boolean'>
-  readonly additional_data_name: Prisma.FieldRef<"Sport_event", 'String'>
   readonly gender: Prisma.FieldRef<"Sport_event", 'Gender'>
 }
     

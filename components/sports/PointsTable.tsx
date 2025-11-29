@@ -20,26 +20,18 @@ export type DepartmentScore = {
   draws: number;
   matches: number;
   points: number;
-  additional_data: {
-    name: string;
-    value: number;
-  } | null;
 };
 
 const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
   const sortedScores = [...scores].sort((a, b) => {
     if (b.points !== a.points) return b.points - a.points;
-    if (b.wins !== a.wins) return b.wins - a.wins;
-    const aValue = a.additional_data?.value ?? Number.NEGATIVE_INFINITY;
-    const bValue = b.additional_data?.value ?? Number.NEGATIVE_INFINITY;
-    return bValue - aValue;
+    // if (b.wins !== a.wins)
+    return b.wins - a.wins;
   });
   const rankedScores = sortedScores.reduce<
     { score: DepartmentScore; position: number; tieBreakKey: string }[]
   >((acc, score, index) => {
-    const tieBreakKey = `${score.points}-${score.wins}-${score.losses}-${
-      score.additional_data?.value ?? Number.NEGATIVE_INFINITY
-    }`;
+    const tieBreakKey = `${score.points}-${score.wins}-${score.losses}`;
     const prev = acc[index - 1];
     const position =
       prev && prev.tieBreakKey === tieBreakKey ? prev.position : index + 1;
@@ -63,9 +55,6 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
             <TableHead className="text-right">Losses</TableHead>
             <TableHead className="text-right">Draws</TableHead>
             <TableHead className="text-right">Points</TableHead>
-            <TableHead className="text-right">
-              {scores[0].additional_data?.name}
-            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -84,11 +73,6 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
                 <TableCell className="text-right">{score.draws}</TableCell>
                 <TableCell className="text-right font-bold">
                   {score.points}
-                </TableCell>
-                <TableCell className="text-right">
-                  {score.additional_data?.name
-                    ? `${score.additional_data.value}`
-                    : "-"}
                 </TableCell>
               </TableRow>
             ))
