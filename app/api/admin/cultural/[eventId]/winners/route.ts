@@ -1,24 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/app/utils/VerifyAdmin";
-import {
-  DEPARTMENTNAME as DEPARTMENT_VALUES,
-  type DEPARTMENTNAME,
-} from "@/app/generated/prisma/enums";
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });
-
-const normalizeDepartment = (value: unknown): DEPARTMENTNAME | null => {
-  if (typeof value !== "string") {
-    return null;
-  }
-
-  const key = value
-    .replace(/-/g, "_")
-    .toUpperCase() as keyof typeof DEPARTMENT_VALUES;
-  return DEPARTMENT_VALUES[key] ?? null;
-};
 
 export async function GET(
   _request: Request,
@@ -60,7 +45,7 @@ export async function POST(
     const { eventId } = await params;
     const body = (await request.json()) as Record<string, unknown>;
     const positionRaw = body["position"];
-    const departmentRaw = body.departmentName;
+    const departmentName = body.departmentName;
     const pointsRaw = body["points"];
 
     if (typeof positionRaw !== "number" || positionRaw <= 0) {
@@ -71,11 +56,7 @@ export async function POST(
       return formatError("Points must be a non-negative number");
     }
 
-    const departmentName = normalizeDepartment(departmentRaw)?.replace(
-      "-",
-      "_"
-    );
-    if (!departmentName) {
+    if (typeof departmentName !== "string") {
       return formatError("Department must be provided");
     }
 
@@ -83,7 +64,6 @@ export async function POST(
       data: {
         eventId,
         position: positionRaw,
-        //@ts-expect-error Department will be correct.
         departmentName,
         points: pointsRaw,
       },
@@ -122,7 +102,7 @@ export async function PATCH(
 
     const updateData: Partial<{
       position: number;
-      departmentName: DEPARTMENTNAME;
+      departmentName: string;
       points: number;
     }> = {};
 
@@ -136,8 +116,8 @@ export async function PATCH(
     }
 
     if (Object.prototype.hasOwnProperty.call(body, "departmentName")) {
-      const departmentName = normalizeDepartment(body.departmentName);
-      if (!departmentName) {
+      const departmentName = body.departmentName;
+      if (typeof departmentName !== "string") {
         return formatError("Department must be provided");
       }
       updateData.departmentName = departmentName;

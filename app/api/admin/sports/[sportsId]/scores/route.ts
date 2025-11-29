@@ -1,17 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import {
-  DEPARTMENTNAME as DEPARTMENT_VALUES,
-  type DEPARTMENTNAME,
-} from "@/app/generated/prisma/enums";
 import { verifyAdmin } from "@/app/utils/VerifyAdmin";
-
-const DEPARTMENT_IDS = Object.values(DEPARTMENT_VALUES) as DEPARTMENTNAME[];
-
-const isDepartmentName = (value: unknown): value is DEPARTMENTNAME => {
-  if (typeof value !== "string") return false;
-  return DEPARTMENT_IDS.includes(value as DEPARTMENTNAME);
-};
 
 const parseNumber = (value: unknown, fallback = 0): number => {
   if (typeof value === "number" && Number.isFinite(value)) return value;
@@ -41,10 +30,13 @@ export async function POST(
     const department_id_raw = (body as Record<string, unknown>)[
       "department_id"
     ];
-    const department_id = isDepartmentName(department_id_raw)
-      ? department_id_raw.replace("-", "_")
-      : null;
-
+    const department_id = department_id_raw;
+    if (typeof department_id !== "string") {
+      return NextResponse.json(
+        { error: "Invalid department_id" },
+        { status: 400 }
+      );
+    }
     if (!department_id) {
       return NextResponse.json(
         { error: "Invalid or missing department_id" },
@@ -64,7 +56,6 @@ export async function POST(
       where: {
         event_id_department_id: {
           event_id: sportsId,
-          //@ts-expect-error The type is correct
           department_id,
         },
       },

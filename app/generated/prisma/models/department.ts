@@ -25,11 +25,11 @@ export type AggregateDepartment = {
 }
 
 export type DepartmentMinAggregateOutputType = {
-  name: $Enums.DEPARTMENTNAME | null
+  name: string | null
 }
 
 export type DepartmentMaxAggregateOutputType = {
-  name: $Enums.DEPARTMENTNAME | null
+  name: string | null
 }
 
 export type DepartmentCountAggregateOutputType = {
@@ -124,7 +124,7 @@ export type departmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type DepartmentGroupByOutputType = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   _count: DepartmentCountAggregateOutputType | null
   _min: DepartmentMinAggregateOutputType | null
   _max: DepartmentMaxAggregateOutputType | null
@@ -149,7 +149,7 @@ export type departmentWhereInput = {
   AND?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
   OR?: Prisma.departmentWhereInput[]
   NOT?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
-  name?: Prisma.EnumDEPARTMENTNAMEFilter<"department"> | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFilter<"department"> | string
   scores?: Prisma.ScoreListRelationFilter
   culturalWinners?: Prisma.CulturalWinnersListRelationFilter
 }
@@ -161,7 +161,7 @@ export type departmentOrderByWithRelationInput = {
 }
 
 export type departmentWhereUniqueInput = Prisma.AtLeast<{
-  name?: $Enums.DEPARTMENTNAME
+  name?: string
   AND?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
   OR?: Prisma.departmentWhereInput[]
   NOT?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
@@ -180,43 +180,43 @@ export type departmentScalarWhereWithAggregatesInput = {
   AND?: Prisma.departmentScalarWhereWithAggregatesInput | Prisma.departmentScalarWhereWithAggregatesInput[]
   OR?: Prisma.departmentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.departmentScalarWhereWithAggregatesInput | Prisma.departmentScalarWhereWithAggregatesInput[]
-  name?: Prisma.EnumDEPARTMENTNAMEWithAggregatesFilter<"department"> | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringWithAggregatesFilter<"department"> | string
 }
 
 export type departmentCreateInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   scores?: Prisma.ScoreCreateNestedManyWithoutDepartmentInput
   culturalWinners?: Prisma.CulturalWinnersCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUncheckedCreateInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutDepartmentInput
   culturalWinners?: Prisma.CulturalWinnersUncheckedCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUpdateInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   scores?: Prisma.ScoreUpdateManyWithoutDepartmentNestedInput
   culturalWinners?: Prisma.CulturalWinnersUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentUncheckedUpdateInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutDepartmentNestedInput
   culturalWinners?: Prisma.CulturalWinnersUncheckedUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentCreateManyInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
 }
 
 export type departmentUpdateManyMutationInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type departmentUncheckedUpdateManyInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type departmentCountOrderByAggregateInput = {
@@ -236,8 +236,8 @@ export type DepartmentScalarRelationFilter = {
   isNot?: Prisma.departmentWhereInput
 }
 
-export type EnumDEPARTMENTNAMEFieldUpdateOperationsInput = {
-  set?: $Enums.DEPARTMENTNAME
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type departmentCreateNestedOneWithoutScoresInput = {
@@ -269,12 +269,12 @@ export type departmentUpdateOneRequiredWithoutCulturalWinnersNestedInput = {
 }
 
 export type departmentCreateWithoutScoresInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   culturalWinners?: Prisma.CulturalWinnersCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUncheckedCreateWithoutScoresInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   culturalWinners?: Prisma.CulturalWinnersUncheckedCreateNestedManyWithoutDepartmentInput
 }
 
@@ -295,22 +295,22 @@ export type departmentUpdateToOneWithWhereWithoutScoresInput = {
 }
 
 export type departmentUpdateWithoutScoresInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   culturalWinners?: Prisma.CulturalWinnersUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentUncheckedUpdateWithoutScoresInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   culturalWinners?: Prisma.CulturalWinnersUncheckedUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentCreateWithoutCulturalWinnersInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   scores?: Prisma.ScoreCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUncheckedCreateWithoutCulturalWinnersInput = {
-  name: $Enums.DEPARTMENTNAME
+  name: string
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutDepartmentInput
 }
 
@@ -331,12 +331,12 @@ export type departmentUpdateToOneWithWhereWithoutCulturalWinnersInput = {
 }
 
 export type departmentUpdateWithoutCulturalWinnersInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   scores?: Prisma.ScoreUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentUncheckedUpdateWithoutCulturalWinnersInput = {
-  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutDepartmentNestedInput
 }
 
@@ -415,7 +415,7 @@ export type $departmentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     culturalWinners: Prisma.$CulturalWinnersPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    name: $Enums.DEPARTMENTNAME
+    name: string
   }, ExtArgs["result"]["department"]>
   composites: {}
 }
@@ -499,6 +499,8 @@ export interface departmentDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * // Get first 10 Departments
    * const departments = await prisma.department.findMany({ take: 10 })
    * 
+   * // Only select the `name`
+   * const departmentWithNameOnly = await prisma.department.findMany({ select: { name: true } })
    * 
    */
   findMany<T extends departmentFindManyArgs>(args?: Prisma.SelectSubset<T, departmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$departmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -542,6 +544,13 @@ export interface departmentDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
+   * // Create many Departments and only return the `name`
+   * const departmentWithNameOnly = await prisma.department.createManyAndReturn({
+   *   select: { name: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
    * 
@@ -626,6 +635,16 @@ export interface departmentDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
+   * // Update zero or more Departments and only return the `name`
+   * const departmentWithNameOnly = await prisma.department.updateManyAndReturn({
+   *   select: { name: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
    * 
@@ -822,7 +841,7 @@ export interface Prisma__departmentClient<T, Null = never, ExtArgs extends runti
  * Fields of the department model
  */
 export interface departmentFieldRefs {
-  readonly name: Prisma.FieldRef<"department", 'DEPARTMENTNAME'>
+  readonly name: Prisma.FieldRef<"department", 'String'>
 }
     
 

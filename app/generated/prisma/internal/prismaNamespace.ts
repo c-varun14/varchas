@@ -1356,20 +1356,6 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 /**
- * Reference to a field of type 'DEPARTMENTNAME'
- */
-export type EnumDEPARTMENTNAMEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DEPARTMENTNAME'>
-    
-
-
-/**
- * Reference to a field of type 'DEPARTMENTNAME[]'
- */
-export type ListEnumDEPARTMENTNAMEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DEPARTMENTNAME[]'>
-    
-
-
-/**
  * Reference to a field of type 'String'
  */
 export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>

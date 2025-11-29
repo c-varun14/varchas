@@ -9,29 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const DEPARTMENTNAME = {
-  AE: 'AE',
-  AIML: 'AIML',
-  AS: 'AS',
-  C_CYCLE: 'C-CYCLE',
-  CG: 'CG',
-  CH: 'CH',
-  CSE: 'CSE',
-  CV: 'CV',
-  DSE: 'DSE',
-  ECE: 'ECE',
-  ECE_ACT: 'ECE-ACT',
-  EEE: 'EEE',
-  IIOT: 'IIOT',
-  ISE: 'ISE',
-  ME: 'ME',
-  P_CYCLE: 'P-CYCLE',
-  VLSI: 'VLSI'
-} as const
-
-export type DEPARTMENTNAME = (typeof DEPARTMENTNAME)[keyof typeof DEPARTMENTNAME]
-
-
 export const Gender = {
   MALE: 'MALE',
   FEMALE: 'FEMALE'

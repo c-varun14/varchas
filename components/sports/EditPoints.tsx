@@ -12,17 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  DEPARTMENTNAME as DEPARTMENT_VALUES,
-  type DEPARTMENTNAME,
-} from "@/app/generated/prisma/enums";
 import PointsTable, { type DepartmentScore } from "./PointsTable";
-
-type DepartmentId = DEPARTMENTNAME;
-
-const DEPARTMENTS: DepartmentId[] = Object.values(
-  DEPARTMENT_VALUES
-) as DepartmentId[];
+import { DEPARTMENTNAMES } from "@/app/utils/DEPARTMENTS";
 
 type FormState = {
   wins: number;
@@ -46,12 +37,12 @@ export default function EditPoints({
   initialScores,
 }: PointsTableProps) {
   const [scores, setScores] = useState<DepartmentScore[]>(initialScores);
-  const [selectedDept, setSelectedDept] = useState<DepartmentId | "">("");
+  const [selectedDept, setSelectedDept] = useState<string | "">("");
   const [formData, setFormData] = useState(DEFAULT_FORM_STATE);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleDepartmentChange = (departmentId: DepartmentId) => {
+  const handleDepartmentChange = (departmentId: string) => {
     setSelectedDept(departmentId);
     setError(null);
 
@@ -131,7 +122,7 @@ export default function EditPoints({
                   <SelectValue placeholder="Select department" />
                 </SelectTrigger>
                 <SelectContent>
-                  {DEPARTMENTS.map((dept) => (
+                  {DEPARTMENTNAMES.map((dept) => (
                     <SelectItem key={dept} value={dept}>
                       {dept}
                     </SelectItem>

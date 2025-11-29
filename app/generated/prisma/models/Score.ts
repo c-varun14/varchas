@@ -43,7 +43,7 @@ export type ScoreSumAggregateOutputType = {
 export type ScoreMinAggregateOutputType = {
   id: string | null
   event_id: string | null
-  department_id: $Enums.DEPARTMENTNAME | null
+  department_id: string | null
   matches: number | null
   wins: number | null
   losses: number | null
@@ -55,7 +55,7 @@ export type ScoreMinAggregateOutputType = {
 export type ScoreMaxAggregateOutputType = {
   id: string | null
   event_id: string | null
-  department_id: $Enums.DEPARTMENTNAME | null
+  department_id: string | null
   matches: number | null
   wins: number | null
   losses: number | null
@@ -218,7 +218,7 @@ export type ScoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ScoreGroupByOutputType = {
   id: string
   event_id: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
   matches: number
   wins: number
   losses: number
@@ -253,7 +253,7 @@ export type ScoreWhereInput = {
   NOT?: Prisma.ScoreWhereInput | Prisma.ScoreWhereInput[]
   id?: Prisma.StringFilter<"Score"> | string
   event_id?: Prisma.StringFilter<"Score"> | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFilter<"Score"> | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFilter<"Score"> | string
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
@@ -285,7 +285,7 @@ export type ScoreWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ScoreWhereInput[]
   NOT?: Prisma.ScoreWhereInput | Prisma.ScoreWhereInput[]
   event_id?: Prisma.StringFilter<"Score"> | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFilter<"Score"> | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFilter<"Score"> | string
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
@@ -319,7 +319,7 @@ export type ScoreScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ScoreScalarWhereWithAggregatesInput | Prisma.ScoreScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Score"> | string
   event_id?: Prisma.StringWithAggregatesFilter<"Score"> | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEWithAggregatesFilter<"Score"> | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringWithAggregatesFilter<"Score"> | string
   matches?: Prisma.IntWithAggregatesFilter<"Score"> | number
   wins?: Prisma.IntWithAggregatesFilter<"Score"> | number
   losses?: Prisma.IntWithAggregatesFilter<"Score"> | number
@@ -343,7 +343,7 @@ export type ScoreCreateInput = {
 export type ScoreUncheckedCreateInput = {
   id?: string
   event_id: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
   matches?: number
   wins?: number
   losses?: number
@@ -367,7 +367,7 @@ export type ScoreUpdateInput = {
 export type ScoreUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFieldUpdateOperationsInput | string
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
@@ -379,7 +379,7 @@ export type ScoreUncheckedUpdateInput = {
 export type ScoreCreateManyInput = {
   id?: string
   event_id: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
   matches?: number
   wins?: number
   losses?: number
@@ -401,7 +401,7 @@ export type ScoreUpdateManyMutationInput = {
 export type ScoreUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFieldUpdateOperationsInput | string
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
@@ -422,7 +422,7 @@ export type ScoreOrderByRelationAggregateInput = {
 
 export type ScoreEvent_idDepartment_idCompoundUniqueInput = {
   event_id: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
 }
 
 export type ScoreCountOrderByAggregateInput = {
@@ -625,7 +625,7 @@ export type ScoreScalarWhereInput = {
   NOT?: Prisma.ScoreScalarWhereInput | Prisma.ScoreScalarWhereInput[]
   id?: Prisma.StringFilter<"Score"> | string
   event_id?: Prisma.StringFilter<"Score"> | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFilter<"Score"> | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFilter<"Score"> | string
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
@@ -647,7 +647,7 @@ export type ScoreCreateWithoutEventInput = {
 
 export type ScoreUncheckedCreateWithoutEventInput = {
   id?: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
   matches?: number
   wins?: number
   losses?: number
@@ -728,7 +728,7 @@ export type ScoreUncheckedUpdateManyWithoutDepartmentInput = {
 
 export type ScoreCreateManyEventInput = {
   id?: string
-  department_id: $Enums.DEPARTMENTNAME
+  department_id: string
   matches?: number
   wins?: number
   losses?: number
@@ -750,7 +750,7 @@ export type ScoreUpdateWithoutEventInput = {
 
 export type ScoreUncheckedUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFieldUpdateOperationsInput | string
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
@@ -761,7 +761,7 @@ export type ScoreUncheckedUpdateWithoutEventInput = {
 
 export type ScoreUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  department_id?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  department_id?: Prisma.StringFieldUpdateOperationsInput | string
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
@@ -849,7 +849,7 @@ export type $ScorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     event_id: string
-    department_id: $Enums.DEPARTMENTNAME
+    department_id: string
     matches: number
     wins: number
     losses: number
@@ -1283,7 +1283,7 @@ export interface Prisma__ScoreClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface ScoreFieldRefs {
   readonly id: Prisma.FieldRef<"Score", 'String'>
   readonly event_id: Prisma.FieldRef<"Score", 'String'>
-  readonly department_id: Prisma.FieldRef<"Score", 'DEPARTMENTNAME'>
+  readonly department_id: Prisma.FieldRef<"Score", 'String'>
   readonly matches: Prisma.FieldRef<"Score", 'Int'>
   readonly wins: Prisma.FieldRef<"Score", 'Int'>
   readonly losses: Prisma.FieldRef<"Score", 'Int'>

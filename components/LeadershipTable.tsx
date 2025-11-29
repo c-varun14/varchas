@@ -11,10 +11,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { type DEPARTMENTNAME } from "@/app/generated/prisma/enums";
 
 export type LeadershipEntry = {
-  department: DEPARTMENTNAME;
+  department: string;
   points: number;
   wins: number;
 };
@@ -58,9 +57,6 @@ function computeStandings(entries: LeadershipEntry[]): StandingsRow[] {
     };
   });
 }
-
-const formatDepartment = (department: DEPARTMENTNAME) =>
-  department.replace(/_/g, "-");
 
 export default function LeadershipTable({
   sports,
@@ -152,7 +148,7 @@ export default function LeadershipTable({
                   <TableCell className="px-6 py-4 font-medium">
                     <div className="flex items-center space-x-3">
                       <span className="font-medium text-foreground">
-                        {formatDepartment(row.department)}
+                        {row.department}
                       </span>
                     </div>
                   </TableCell>

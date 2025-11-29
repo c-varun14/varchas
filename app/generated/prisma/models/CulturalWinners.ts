@@ -40,7 +40,7 @@ export type CulturalWinnersMinAggregateOutputType = {
   id: string | null
   eventId: string | null
   position: number | null
-  departmentName: $Enums.DEPARTMENTNAME | null
+  departmentName: string | null
   points: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -50,7 +50,7 @@ export type CulturalWinnersMaxAggregateOutputType = {
   id: string | null
   eventId: string | null
   position: number | null
-  departmentName: $Enums.DEPARTMENTNAME | null
+  departmentName: string | null
   points: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -199,7 +199,7 @@ export type CulturalWinnersGroupByOutputType = {
   id: string
   eventId: string
   position: number
-  departmentName: $Enums.DEPARTMENTNAME
+  departmentName: string
   points: number
   createdAt: Date
   updatedAt: Date
@@ -232,7 +232,7 @@ export type CulturalWinnersWhereInput = {
   id?: Prisma.StringFilter<"CulturalWinners"> | string
   eventId?: Prisma.StringFilter<"CulturalWinners"> | string
   position?: Prisma.IntFilter<"CulturalWinners"> | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFilter<"CulturalWinners"> | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFilter<"CulturalWinners"> | string
   points?: Prisma.IntFilter<"CulturalWinners"> | number
   createdAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
@@ -259,7 +259,7 @@ export type CulturalWinnersWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CulturalWinnersWhereInput | Prisma.CulturalWinnersWhereInput[]
   eventId?: Prisma.StringFilter<"CulturalWinners"> | string
   position?: Prisma.IntFilter<"CulturalWinners"> | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFilter<"CulturalWinners"> | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFilter<"CulturalWinners"> | string
   points?: Prisma.IntFilter<"CulturalWinners"> | number
   createdAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
@@ -289,7 +289,7 @@ export type CulturalWinnersScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"CulturalWinners"> | string
   eventId?: Prisma.StringWithAggregatesFilter<"CulturalWinners"> | string
   position?: Prisma.IntWithAggregatesFilter<"CulturalWinners"> | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEWithAggregatesFilter<"CulturalWinners"> | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringWithAggregatesFilter<"CulturalWinners"> | string
   points?: Prisma.IntWithAggregatesFilter<"CulturalWinners"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CulturalWinners"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CulturalWinners"> | Date | string
@@ -309,7 +309,7 @@ export type CulturalWinnersUncheckedCreateInput = {
   id?: string
   eventId: string
   position: number
-  departmentName: $Enums.DEPARTMENTNAME
+  departmentName: string
   points: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -329,7 +329,7 @@ export type CulturalWinnersUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,7 +339,7 @@ export type CulturalWinnersCreateManyInput = {
   id?: string
   eventId: string
   position: number
-  departmentName: $Enums.DEPARTMENTNAME
+  departmentName: string
   points: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -357,7 +357,7 @@ export type CulturalWinnersUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -548,7 +548,7 @@ export type CulturalWinnersScalarWhereInput = {
   id?: Prisma.StringFilter<"CulturalWinners"> | string
   eventId?: Prisma.StringFilter<"CulturalWinners"> | string
   position?: Prisma.IntFilter<"CulturalWinners"> | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFilter<"CulturalWinners"> | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFilter<"CulturalWinners"> | string
   points?: Prisma.IntFilter<"CulturalWinners"> | number
   createdAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CulturalWinners"> | Date | string
@@ -566,7 +566,7 @@ export type CulturalWinnersCreateWithoutEventInput = {
 export type CulturalWinnersUncheckedCreateWithoutEventInput = {
   id?: string
   position: number
-  departmentName: $Enums.DEPARTMENTNAME
+  departmentName: string
   points: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -637,7 +637,7 @@ export type CulturalWinnersUncheckedUpdateManyWithoutDepartmentInput = {
 export type CulturalWinnersCreateManyEventInput = {
   id?: string
   position: number
-  departmentName: $Enums.DEPARTMENTNAME
+  departmentName: string
   points: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -655,7 +655,7 @@ export type CulturalWinnersUpdateWithoutEventInput = {
 export type CulturalWinnersUncheckedUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -664,7 +664,7 @@ export type CulturalWinnersUncheckedUpdateWithoutEventInput = {
 export type CulturalWinnersUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentName?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -742,7 +742,7 @@ export type $CulturalWinnersPayload<ExtArgs extends runtime.Types.Extensions.Int
     id: string
     eventId: string
     position: number
-    departmentName: $Enums.DEPARTMENTNAME
+    departmentName: string
     points: number
     createdAt: Date
     updatedAt: Date
@@ -1174,7 +1174,7 @@ export interface CulturalWinnersFieldRefs {
   readonly id: Prisma.FieldRef<"CulturalWinners", 'String'>
   readonly eventId: Prisma.FieldRef<"CulturalWinners", 'String'>
   readonly position: Prisma.FieldRef<"CulturalWinners", 'Int'>
-  readonly departmentName: Prisma.FieldRef<"CulturalWinners", 'DEPARTMENTNAME'>
+  readonly departmentName: Prisma.FieldRef<"CulturalWinners", 'String'>
   readonly points: Prisma.FieldRef<"CulturalWinners", 'Int'>
   readonly createdAt: Prisma.FieldRef<"CulturalWinners", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CulturalWinners", 'DateTime'>

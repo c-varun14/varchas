@@ -302,10 +302,6 @@ export type Sport_eventScalarRelationFilter = {
   isNot?: Prisma.Sport_eventWhereInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }

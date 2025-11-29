@@ -21,24 +21,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DEPARTMENTNAME as DEPARTMENT_VALUES,
-  type DEPARTMENTNAME,
-} from "@/app/generated/prisma/enums";
 import { cn } from "@/lib/utils";
-
-const DEPARTMENTS = Object.values(DEPARTMENT_VALUES) as DEPARTMENTNAME[];
+import { DEPARTMENTNAMES } from "@/app/utils/DEPARTMENTS";
 
 export type CulturalWinnerDTO = {
   id: string;
   position: number;
-  departmentName: DEPARTMENTNAME;
+  departmentName: string;
   points: number;
 };
 
 type FormState = {
   position: string;
-  departmentName: DEPARTMENTNAME | "";
+  departmentName: string | "";
   points: string;
 };
 
@@ -275,7 +270,7 @@ export default function ManageCulturalWinners({
                 onValueChange={(value) =>
                   setFormData((prev) => ({
                     ...prev,
-                    departmentName: value as DEPARTMENTNAME,
+                    departmentName: value,
                   }))
                 }
                 disabled={isFormDisabled}
@@ -284,7 +279,7 @@ export default function ManageCulturalWinners({
                   <SelectValue placeholder="Choose department" />
                 </SelectTrigger>
                 <SelectContent>
-                  {DEPARTMENTS.map((dept) => (
+                  {DEPARTMENTNAMES.map((dept) => (
                     <SelectItem key={dept} value={dept}>
                       {dept}
                     </SelectItem>

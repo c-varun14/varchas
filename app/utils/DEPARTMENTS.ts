@@ -1,0 +1,17 @@
+export const DEPARTMENTNAMES = [
+  "AE",
+  "AIML",
+  "AS",
+  "C-CYCLE",
+  "CG",
+  "CH",
+  "CSE",
+  "CV",
+  "DSE",
+  "ECE",
+  "ElECTRO(ACT,VLSI,IIOT)",
+  "EEE",
+  "ISE",
+  "ME",
+  "P-CYCLE",
+];

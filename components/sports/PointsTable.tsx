@@ -8,13 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type DEPARTMENTNAME } from "@/app/generated/prisma/enums";
-
-type DepartmentId = DEPARTMENTNAME;
 
 export type DepartmentScore = {
   id?: string;
-  department_id: DepartmentId;
+  department_id: string;
   wins: number;
   losses: number;
   matches: number;

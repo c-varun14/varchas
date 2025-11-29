@@ -8,28 +8,25 @@ datasource db {
   provider = "postgresql"
 }
 
-enum DEPARTMENTNAME {
-  AE
-  AIML
-  AS
-  C_CYCLE @map("C-CYCLE")
-  CG
-  CH
-  CSE
-  CV
-  DSE
-  ECE
-  ECE_ACT @map("ECE-ACT")
-  EEE
-  IIOT
-  ISE
-  ME
-  P_CYCLE @map("P-CYCLE")
-  VLSI
-}
+// enum String {
+//   AE
+//   AIML
+//   AS
+//   C_CYCLE @map("C-CYCLE")
+//   CG
+//   CH
+//   CSE
+//   CV
+//   DSE
+//   ECE
+//   ElECTRO @map("Electro(ACT,VLSI,IIOT)")
+//   ISE
+//   ME
+//   P_CYCLE @map("P-CYCLE")
+// }
 
 model department {
-  name   DEPARTMENTNAME @id
+  name   String @id 
   scores Score[]
   culturalWinners CulturalWinners[]
 }
@@ -51,7 +48,7 @@ model Sport_event {
 model Score {
   id              String         @id @default(cuid())
   event_id        String
-  department_id   DEPARTMENTNAME 
+  department_id   String 
   matches         Int            @default(0)
   wins            Int            @default(0)
   losses          Int            @default(0)
@@ -60,7 +57,7 @@ model Score {
   updatedAt       DateTime       @updatedAt
 
   event      Sport_event @relation(fields: [event_id], references: [id])
-  department department  @relation(fields: [department_id], references: [name])
+  department department  @relation(fields: [department_id], references: [name], onDelete: Cascade)
 
   @@unique([event_id,department_id])
 }
@@ -159,11 +156,11 @@ model CulturalWinners {
   id              String         @id @default(cuid())
   eventId         String
   position        Int            // 1 for 1st place, 2 for 2nd, etc.
-  departmentName      DEPARTMENTNAME
+  departmentName      String
   points   Int            // Points awarded for this position
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   
   event           CulturalEvent  @relation(fields: [eventId], references: [id])
-  department  department  @relation(fields: [departmentName], references: [name])
+  department  department  @relation(fields: [departmentName], references: [name], onDelete: Cascade)
 }

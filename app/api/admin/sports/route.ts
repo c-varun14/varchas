@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { DEPARTMENTNAME } from "@/app/generated/prisma/client";
 import { verifyAdmin } from "@/app/utils/VerifyAdmin";
 
 export async function GET() {
@@ -48,7 +47,7 @@ export async function POST(request: Request) {
     const departments = await prisma.department.findMany();
 
     const result = await Promise.all(
-      departments.map((dept: { name: DEPARTMENTNAME }) =>
+      departments.map((dept: { name: string }) =>
         prisma.score.create({
           data: {
             event_id: sport.id,

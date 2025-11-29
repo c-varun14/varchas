@@ -43,7 +43,7 @@ export default async function Home() {
               Overall Standings
             </p>
             <h2 className="text-2xl font-bold text-foreground">
-              Department Points Table
+              Department Championship Table
             </h2>
           </div>
         </div>
