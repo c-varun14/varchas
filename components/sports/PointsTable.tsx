@@ -52,7 +52,6 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
             <TableHead className="text-right">Matches</TableHead>
             <TableHead className="text-right">Wins</TableHead>
             <TableHead className="text-right">Losses</TableHead>
-            <TableHead className="text-right">Draws</TableHead>
             <TableHead className="text-right">Points</TableHead>
           </TableRow>
         </TableHeader>

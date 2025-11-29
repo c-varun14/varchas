@@ -151,11 +151,13 @@ export type departmentWhereInput = {
   NOT?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
   name?: Prisma.EnumDEPARTMENTNAMEFilter<"department"> | $Enums.DEPARTMENTNAME
   scores?: Prisma.ScoreListRelationFilter
+  culturalWinners?: Prisma.CulturalWinnersListRelationFilter
 }
 
 export type departmentOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   scores?: Prisma.ScoreOrderByRelationAggregateInput
+  culturalWinners?: Prisma.CulturalWinnersOrderByRelationAggregateInput
 }
 
 export type departmentWhereUniqueInput = Prisma.AtLeast<{
@@ -164,6 +166,7 @@ export type departmentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.departmentWhereInput[]
   NOT?: Prisma.departmentWhereInput | Prisma.departmentWhereInput[]
   scores?: Prisma.ScoreListRelationFilter
+  culturalWinners?: Prisma.CulturalWinnersListRelationFilter
 }, "name">
 
 export type departmentOrderByWithAggregationInput = {
@@ -183,21 +186,25 @@ export type departmentScalarWhereWithAggregatesInput = {
 export type departmentCreateInput = {
   name: $Enums.DEPARTMENTNAME
   scores?: Prisma.ScoreCreateNestedManyWithoutDepartmentInput
+  culturalWinners?: Prisma.CulturalWinnersCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUncheckedCreateInput = {
   name: $Enums.DEPARTMENTNAME
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutDepartmentInput
+  culturalWinners?: Prisma.CulturalWinnersUncheckedCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUpdateInput = {
   name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
   scores?: Prisma.ScoreUpdateManyWithoutDepartmentNestedInput
+  culturalWinners?: Prisma.CulturalWinnersUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentUncheckedUpdateInput = {
   name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutDepartmentNestedInput
+  culturalWinners?: Prisma.CulturalWinnersUncheckedUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentCreateManyInput = {
@@ -247,12 +254,28 @@ export type departmentUpdateOneRequiredWithoutScoresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.departmentUpdateToOneWithWhereWithoutScoresInput, Prisma.departmentUpdateWithoutScoresInput>, Prisma.departmentUncheckedUpdateWithoutScoresInput>
 }
 
+export type departmentCreateNestedOneWithoutCulturalWinnersInput = {
+  create?: Prisma.XOR<Prisma.departmentCreateWithoutCulturalWinnersInput, Prisma.departmentUncheckedCreateWithoutCulturalWinnersInput>
+  connectOrCreate?: Prisma.departmentCreateOrConnectWithoutCulturalWinnersInput
+  connect?: Prisma.departmentWhereUniqueInput
+}
+
+export type departmentUpdateOneRequiredWithoutCulturalWinnersNestedInput = {
+  create?: Prisma.XOR<Prisma.departmentCreateWithoutCulturalWinnersInput, Prisma.departmentUncheckedCreateWithoutCulturalWinnersInput>
+  connectOrCreate?: Prisma.departmentCreateOrConnectWithoutCulturalWinnersInput
+  upsert?: Prisma.departmentUpsertWithoutCulturalWinnersInput
+  connect?: Prisma.departmentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.departmentUpdateToOneWithWhereWithoutCulturalWinnersInput, Prisma.departmentUpdateWithoutCulturalWinnersInput>, Prisma.departmentUncheckedUpdateWithoutCulturalWinnersInput>
+}
+
 export type departmentCreateWithoutScoresInput = {
   name: $Enums.DEPARTMENTNAME
+  culturalWinners?: Prisma.CulturalWinnersCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentUncheckedCreateWithoutScoresInput = {
   name: $Enums.DEPARTMENTNAME
+  culturalWinners?: Prisma.CulturalWinnersUncheckedCreateNestedManyWithoutDepartmentInput
 }
 
 export type departmentCreateOrConnectWithoutScoresInput = {
@@ -273,10 +296,48 @@ export type departmentUpdateToOneWithWhereWithoutScoresInput = {
 
 export type departmentUpdateWithoutScoresInput = {
   name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  culturalWinners?: Prisma.CulturalWinnersUpdateManyWithoutDepartmentNestedInput
 }
 
 export type departmentUncheckedUpdateWithoutScoresInput = {
   name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  culturalWinners?: Prisma.CulturalWinnersUncheckedUpdateManyWithoutDepartmentNestedInput
+}
+
+export type departmentCreateWithoutCulturalWinnersInput = {
+  name: $Enums.DEPARTMENTNAME
+  scores?: Prisma.ScoreCreateNestedManyWithoutDepartmentInput
+}
+
+export type departmentUncheckedCreateWithoutCulturalWinnersInput = {
+  name: $Enums.DEPARTMENTNAME
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutDepartmentInput
+}
+
+export type departmentCreateOrConnectWithoutCulturalWinnersInput = {
+  where: Prisma.departmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.departmentCreateWithoutCulturalWinnersInput, Prisma.departmentUncheckedCreateWithoutCulturalWinnersInput>
+}
+
+export type departmentUpsertWithoutCulturalWinnersInput = {
+  update: Prisma.XOR<Prisma.departmentUpdateWithoutCulturalWinnersInput, Prisma.departmentUncheckedUpdateWithoutCulturalWinnersInput>
+  create: Prisma.XOR<Prisma.departmentCreateWithoutCulturalWinnersInput, Prisma.departmentUncheckedCreateWithoutCulturalWinnersInput>
+  where?: Prisma.departmentWhereInput
+}
+
+export type departmentUpdateToOneWithWhereWithoutCulturalWinnersInput = {
+  where?: Prisma.departmentWhereInput
+  data: Prisma.XOR<Prisma.departmentUpdateWithoutCulturalWinnersInput, Prisma.departmentUncheckedUpdateWithoutCulturalWinnersInput>
+}
+
+export type departmentUpdateWithoutCulturalWinnersInput = {
+  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  scores?: Prisma.ScoreUpdateManyWithoutDepartmentNestedInput
+}
+
+export type departmentUncheckedUpdateWithoutCulturalWinnersInput = {
+  name?: Prisma.EnumDEPARTMENTNAMEFieldUpdateOperationsInput | $Enums.DEPARTMENTNAME
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutDepartmentNestedInput
 }
 
 
@@ -286,10 +347,12 @@ export type departmentUncheckedUpdateWithoutScoresInput = {
 
 export type DepartmentCountOutputType = {
   scores: number
+  culturalWinners: number
 }
 
 export type DepartmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | DepartmentCountOutputTypeCountScoresArgs
+  culturalWinners?: boolean | DepartmentCountOutputTypeCountCulturalWinnersArgs
 }
 
 /**
@@ -309,10 +372,18 @@ export type DepartmentCountOutputTypeCountScoresArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ScoreWhereInput
 }
 
+/**
+ * DepartmentCountOutputType without action
+ */
+export type DepartmentCountOutputTypeCountCulturalWinnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CulturalWinnersWhereInput
+}
+
 
 export type departmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   name?: boolean
   scores?: boolean | Prisma.department$scoresArgs<ExtArgs>
+  culturalWinners?: boolean | Prisma.department$culturalWinnersArgs<ExtArgs>
   _count?: boolean | Prisma.DepartmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["department"]>
 
@@ -331,6 +402,7 @@ export type departmentSelectScalar = {
 export type departmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"name", ExtArgs["result"]["department"]>
 export type departmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | Prisma.department$scoresArgs<ExtArgs>
+  culturalWinners?: boolean | Prisma.department$culturalWinnersArgs<ExtArgs>
   _count?: boolean | Prisma.DepartmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type departmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -340,6 +412,7 @@ export type $departmentPayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "department"
   objects: {
     scores: Prisma.$ScorePayload<ExtArgs>[]
+    culturalWinners: Prisma.$CulturalWinnersPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     name: $Enums.DEPARTMENTNAME
@@ -719,6 +792,7 @@ readonly fields: departmentFieldRefs;
 export interface Prisma__departmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   scores<T extends Prisma.department$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.department$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  culturalWinners<T extends Prisma.department$culturalWinnersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.department$culturalWinnersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CulturalWinnersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1158,6 +1232,30 @@ export type department$scoresArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ScoreScalarFieldEnum | Prisma.ScoreScalarFieldEnum[]
+}
+
+/**
+ * department.culturalWinners
+ */
+export type department$culturalWinnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CulturalWinners
+   */
+  select?: Prisma.CulturalWinnersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CulturalWinners
+   */
+  omit?: Prisma.CulturalWinnersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CulturalWinnersInclude<ExtArgs> | null
+  where?: Prisma.CulturalWinnersWhereInput
+  orderBy?: Prisma.CulturalWinnersOrderByWithRelationInput | Prisma.CulturalWinnersOrderByWithRelationInput[]
+  cursor?: Prisma.CulturalWinnersWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CulturalWinnersScalarFieldEnum | Prisma.CulturalWinnersScalarFieldEnum[]
 }
 
 /**

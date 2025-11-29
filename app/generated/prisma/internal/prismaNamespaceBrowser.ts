@@ -59,7 +59,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Cultural: 'Cultural'
+  CulturalEvent: 'CulturalEvent',
+  CulturalWinners: 'CulturalWinners'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -183,13 +184,32 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
-export const CulturalScalarFieldEnum = {
+export const CulturalEventScalarFieldEnum = {
   id: 'id',
-  date_time: 'date_time',
-  venue: 'venue'
+  name: 'name',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  venue: 'venue',
+  solo: 'solo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type CulturalScalarFieldEnum = (typeof CulturalScalarFieldEnum)[keyof typeof CulturalScalarFieldEnum]
+export type CulturalEventScalarFieldEnum = (typeof CulturalEventScalarFieldEnum)[keyof typeof CulturalEventScalarFieldEnum]
+
+
+export const CulturalWinnersScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  position: 'position',
+  departmentName: 'departmentName',
+  points: 'points',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CulturalWinnersScalarFieldEnum = (typeof CulturalWinnersScalarFieldEnum)[keyof typeof CulturalWinnersScalarFieldEnum]
 
 
 export const SortOrder = {

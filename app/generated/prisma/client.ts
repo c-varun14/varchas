@@ -80,7 +80,12 @@ export type Account = Prisma.AccountModel
  */
 export type Verification = Prisma.VerificationModel
 /**
- * Model Cultural
+ * Model CulturalEvent
  * 
  */
-export type Cultural = Prisma.CulturalModel
+export type CulturalEvent = Prisma.CulturalEventModel
+/**
+ * Model CulturalWinners
+ * 
+ */
+export type CulturalWinners = Prisma.CulturalWinnersModel

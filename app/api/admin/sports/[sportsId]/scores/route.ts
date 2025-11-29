@@ -22,12 +22,6 @@ const parseNumber = (value: unknown, fallback = 0): number => {
   return fallback;
 };
 
-const parseString = (value: unknown): string | null => {
-  if (typeof value !== "string") return null;
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : null;
-};
-
 export async function POST(
   request: Request,
   {
@@ -48,7 +42,7 @@ export async function POST(
       "department_id"
     ];
     const department_id = isDepartmentName(department_id_raw)
-      ? department_id_raw
+      ? department_id_raw.replace("-", "_")
       : null;
 
     if (!department_id) {
@@ -62,12 +56,7 @@ export async function POST(
     const losses = parseNumber((body as Record<string, unknown>)["losses"]);
     const draws = parseNumber((body as Record<string, unknown>)["draws"]);
     const points = parseNumber((body as Record<string, unknown>)["points"]);
-    const additional_data_value = parseNumber(
-      (body as Record<string, unknown>)["additional_data_value"]
-    );
-    const additional_data_name = parseString(
-      (body as Record<string, unknown>)["additional_data_name"]
-    );
+
     const matches = wins + losses + draws;
 
     // Upsert the score
@@ -75,6 +64,7 @@ export async function POST(
       where: {
         event_id_department_id: {
           event_id: sportsId,
+          //@ts-expect-error The type is correct
           department_id,
         },
       },

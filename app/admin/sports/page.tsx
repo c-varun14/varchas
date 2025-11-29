@@ -36,9 +36,8 @@ export default function SportsAdminPage() {
   const [newSport, setNewSport] = useState<{
     name: string;
     gender: string;
-    additional_data_name: string;
     solo: boolean;
-  }>({ name: "", gender: "", additional_data_name: "", solo: false });
+  }>({ name: "", gender: "", solo: false });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -59,7 +58,7 @@ export default function SportsAdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newSport.name || !newSport.gender || !newSport.additional_data_name) {
+    if (!newSport.name || !newSport.gender) {
       setError("Please fill in all fields");
       return;
     }
@@ -86,7 +85,6 @@ export default function SportsAdminPage() {
       setNewSport({
         name: "",
         gender: "",
-        additional_data_name: "",
         solo: false,
       });
     } catch (err) {
@@ -170,30 +168,6 @@ export default function SportsAdminPage() {
               </Select>
             </div>
 
-            <div className="md:col-span-2 space-y-2">
-              <Label
-                htmlFor="additionalDataName"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Deciding factor Name
-              </Label>
-              <Input
-                id="additionalDataName"
-                placeholder="e.g. SD, Average"
-                value={newSport.additional_data_name}
-                onChange={(e) =>
-                  setNewSport({
-                    ...newSport,
-                    additional_data_name: e.target.value,
-                  })
-                }
-                className="h-10"
-              />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                This will be used to decide when two teams points are equal
-              </p>
-            </div>
-
             <div className="flex items-center space-x-2 p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
               <div className="flex items-center h-5">
                 <input
@@ -225,12 +199,7 @@ export default function SportsAdminPage() {
           <div className="flex justify-end pt-2">
             <Button
               type="submit"
-              disabled={
-                loading ||
-                !newSport.name ||
-                !newSport.gender ||
-                !newSport.additional_data_name
-              }
+              disabled={loading || !newSport.name || !newSport.gender}
               className="w-full sm:w-auto"
             >
               {loading ? (

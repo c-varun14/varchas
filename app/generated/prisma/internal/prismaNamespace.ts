@@ -392,7 +392,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Cultural: 'Cultural'
+  CulturalEvent: 'CulturalEvent',
+  CulturalWinners: 'CulturalWinners'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "department" | "sport_event" | "score" | "fixture" | "user" | "session" | "account" | "verification" | "cultural"
+    modelProps: "department" | "sport_event" | "score" | "fixture" | "user" | "session" | "account" | "verification" | "culturalEvent" | "culturalWinners"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1004,77 +1005,151 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Cultural: {
-      payload: Prisma.$CulturalPayload<ExtArgs>
-      fields: Prisma.CulturalFieldRefs
+    CulturalEvent: {
+      payload: Prisma.$CulturalEventPayload<ExtArgs>
+      fields: Prisma.CulturalEventFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.CulturalFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload> | null
+          args: Prisma.CulturalEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.CulturalFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         findFirst: {
-          args: Prisma.CulturalFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload> | null
+          args: Prisma.CulturalEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.CulturalFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         findMany: {
-          args: Prisma.CulturalFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+          args: Prisma.CulturalEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>[]
         }
         create: {
-          args: Prisma.CulturalCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         createMany: {
-          args: Prisma.CulturalCreateManyArgs<ExtArgs>
+          args: Prisma.CulturalEventCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.CulturalCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+          args: Prisma.CulturalEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>[]
         }
         delete: {
-          args: Prisma.CulturalDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         update: {
-          args: Prisma.CulturalUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         deleteMany: {
-          args: Prisma.CulturalDeleteManyArgs<ExtArgs>
+          args: Prisma.CulturalEventDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.CulturalUpdateManyArgs<ExtArgs>
+          args: Prisma.CulturalEventUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.CulturalUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>[]
+          args: Prisma.CulturalEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>[]
         }
         upsert: {
-          args: Prisma.CulturalUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalPayload>
+          args: Prisma.CulturalEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalEventPayload>
         }
         aggregate: {
-          args: Prisma.CulturalAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCultural>
+          args: Prisma.CulturalEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCulturalEvent>
         }
         groupBy: {
-          args: Prisma.CulturalGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CulturalGroupByOutputType>[]
+          args: Prisma.CulturalEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalEventGroupByOutputType>[]
         }
         count: {
-          args: Prisma.CulturalCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CulturalCountAggregateOutputType> | number
+          args: Prisma.CulturalEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalEventCountAggregateOutputType> | number
+        }
+      }
+    }
+    CulturalWinners: {
+      payload: Prisma.$CulturalWinnersPayload<ExtArgs>
+      fields: Prisma.CulturalWinnersFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CulturalWinnersFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CulturalWinnersFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        findFirst: {
+          args: Prisma.CulturalWinnersFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CulturalWinnersFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        findMany: {
+          args: Prisma.CulturalWinnersFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>[]
+        }
+        create: {
+          args: Prisma.CulturalWinnersCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        createMany: {
+          args: Prisma.CulturalWinnersCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CulturalWinnersCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>[]
+        }
+        delete: {
+          args: Prisma.CulturalWinnersDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        update: {
+          args: Prisma.CulturalWinnersUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        deleteMany: {
+          args: Prisma.CulturalWinnersDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CulturalWinnersUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CulturalWinnersUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>[]
+        }
+        upsert: {
+          args: Prisma.CulturalWinnersUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CulturalWinnersPayload>
+        }
+        aggregate: {
+          args: Prisma.CulturalWinnersAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCulturalWinners>
+        }
+        groupBy: {
+          args: Prisma.CulturalWinnersGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalWinnersGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CulturalWinnersCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CulturalWinnersCountAggregateOutputType> | number
         }
       }
     }
@@ -1222,13 +1297,32 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
-export const CulturalScalarFieldEnum = {
+export const CulturalEventScalarFieldEnum = {
   id: 'id',
-  date_time: 'date_time',
-  venue: 'venue'
+  name: 'name',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  venue: 'venue',
+  solo: 'solo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type CulturalScalarFieldEnum = (typeof CulturalScalarFieldEnum)[keyof typeof CulturalScalarFieldEnum]
+export type CulturalEventScalarFieldEnum = (typeof CulturalEventScalarFieldEnum)[keyof typeof CulturalEventScalarFieldEnum]
+
+
+export const CulturalWinnersScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  position: 'position',
+  departmentName: 'departmentName',
+  points: 'points',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CulturalWinnersScalarFieldEnum = (typeof CulturalWinnersScalarFieldEnum)[keyof typeof CulturalWinnersScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1438,7 +1532,8 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
-  cultural?: Prisma.CulturalOmit
+  culturalEvent?: Prisma.CulturalEventOmit
+  culturalWinners?: Prisma.CulturalWinnersOmit
 }
 
 /* Types for Logging */

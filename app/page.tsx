@@ -1,61 +1,36 @@
 import HeroSection from "@/components/home/HeroSection";
-import PointsTable, {
-  type DepartmentScore,
-} from "@/components/sports/PointsTable";
+import LeadershipTable, {
+  type LeadershipEntry,
+} from "@/components/LeadershipTable";
 import prisma from "@/lib/prisma";
-import { DEPARTMENTNAME } from "@/app/generated/prisma/enums";
 
-type AdditionalDataPayload = {
-  name: string | null;
-  value: number;
-};
-
-const DEPARTMENT_IDS = Object.values(
-  DEPARTMENTNAME
-) as DepartmentScore["department_id"][];
-
-async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
-  const rawScores = await prisma.score.findMany({
-    select: {
-      id: true,
-      department_id: true,
-      wins: true,
-      losses: true,
-      points: true,
+export default async function Home() {
+  const departments = await prisma.department.findMany({
+    include: {
+      culturalWinners: true,
+      scores: true,
     },
   });
 
-  const aggregated = new Map<
-    DepartmentScore["department_id"],
-    DepartmentScore
-  >();
+  const sportsStandings: LeadershipEntry[] = departments.map((department) => ({
+    department: department.name,
+    points: department.scores.reduce((total, score) => total + score.points, 0),
+    wins: department.scores.reduce((total, score) => total + score.wins, 0),
+  }));
 
-  DEPARTMENT_IDS.forEach((departmentId) => {
-    aggregated.set(departmentId, {
-      id: departmentId,
-      department_id: departmentId,
-      wins: 0,
-      losses: 0,
-      matches: 0,
-      points: 0,
-    });
-  });
-
-  rawScores.forEach((score) => {
-    const aggregate = aggregated.get(score.department_id);
-    if (!aggregate) return;
-
-    aggregate.wins += score.wins;
-    aggregate.losses += score.losses;
-    aggregate.matches = aggregate.wins + aggregate.losses;
-    aggregate.points += score.points;
-  });
-
-  return Array.from(aggregated.values());
-}
-
-export default async function Home() {
-  const aggregatedScores = await getAggregatedDepartmentScores();
+  const culturalStandings: LeadershipEntry[] = departments.map(
+    (department) => ({
+      department: department.name,
+      points: department.culturalWinners.reduce(
+        (total, winner) => total + winner.points,
+        0
+      ),
+      wins: department.culturalWinners.reduce(
+        (total, winner) => total + (winner.position === 1 ? 1 : 0),
+        0
+      ),
+    })
+  );
 
   return (
     <>
@@ -72,7 +47,11 @@ export default async function Home() {
             </h2>
           </div>
         </div>
-        <PointsTable scores={aggregatedScores} />
+
+        <LeadershipTable
+          sports={sportsStandings}
+          cultural={culturalStandings}
+        />
       </section>
     </>
   );

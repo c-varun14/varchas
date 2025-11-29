@@ -26,13 +26,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     const body = await request.json();
     const gender = typeof body?.gender === "string" ? body.gender : "";
-    const additional_data_name =
-      typeof body?.additional_data_name === "string"
-        ? body.additional_data_name.trim()
-        : "";
+
     const solo = Boolean(body?.solo);
 
-    if (!body.name || !gender || !additional_data_name) {
+    if (!body.name || !gender) {
       return NextResponse.json(
         { error: "Name, gender and deciding factor are required" },
         { status: 400 }

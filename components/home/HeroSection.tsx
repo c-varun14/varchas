@@ -3,12 +3,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const leftImages = [
-  "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=400&q=80", // Sports
-  "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=400&q=80", // Football
-  "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=400&q=80", // Volleyball
-];
+const leftImages = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg"];
 
 const rightImages = [
   "https://picsum.photos/id/24/400/300", // Literature

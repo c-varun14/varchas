@@ -88,6 +88,7 @@ export default function EditPoints({
           wins: formData.wins,
           losses: formData.losses,
           points: formData.points,
+          id: initialScores[0].id,
         }),
       });
 
