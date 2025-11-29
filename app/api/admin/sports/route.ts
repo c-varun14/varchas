@@ -59,7 +59,6 @@ export async function POST(request: Request) {
             matches: 0,
             wins: 0,
             losses: 0,
-            draws: 0,
             points: 0,
           },
         })

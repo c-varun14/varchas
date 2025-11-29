@@ -1141,7 +1141,6 @@ export const ScoreScalarFieldEnum = {
   matches: 'matches',
   wins: 'wins',
   losses: 'losses',
-  draws: 'draws',
   points: 'points',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

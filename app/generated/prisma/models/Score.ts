@@ -30,7 +30,6 @@ export type ScoreAvgAggregateOutputType = {
   matches: number | null
   wins: number | null
   losses: number | null
-  draws: number | null
   points: number | null
 }
 
@@ -38,7 +37,6 @@ export type ScoreSumAggregateOutputType = {
   matches: number | null
   wins: number | null
   losses: number | null
-  draws: number | null
   points: number | null
 }
 
@@ -49,7 +47,6 @@ export type ScoreMinAggregateOutputType = {
   matches: number | null
   wins: number | null
   losses: number | null
-  draws: number | null
   points: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -62,7 +59,6 @@ export type ScoreMaxAggregateOutputType = {
   matches: number | null
   wins: number | null
   losses: number | null
-  draws: number | null
   points: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -75,7 +71,6 @@ export type ScoreCountAggregateOutputType = {
   matches: number
   wins: number
   losses: number
-  draws: number
   points: number
   createdAt: number
   updatedAt: number
@@ -87,7 +82,6 @@ export type ScoreAvgAggregateInputType = {
   matches?: true
   wins?: true
   losses?: true
-  draws?: true
   points?: true
 }
 
@@ -95,7 +89,6 @@ export type ScoreSumAggregateInputType = {
   matches?: true
   wins?: true
   losses?: true
-  draws?: true
   points?: true
 }
 
@@ -106,7 +99,6 @@ export type ScoreMinAggregateInputType = {
   matches?: true
   wins?: true
   losses?: true
-  draws?: true
   points?: true
   createdAt?: true
   updatedAt?: true
@@ -119,7 +111,6 @@ export type ScoreMaxAggregateInputType = {
   matches?: true
   wins?: true
   losses?: true
-  draws?: true
   points?: true
   createdAt?: true
   updatedAt?: true
@@ -132,7 +123,6 @@ export type ScoreCountAggregateInputType = {
   matches?: true
   wins?: true
   losses?: true
-  draws?: true
   points?: true
   createdAt?: true
   updatedAt?: true
@@ -232,7 +222,6 @@ export type ScoreGroupByOutputType = {
   matches: number
   wins: number
   losses: number
-  draws: number
   points: number
   createdAt: Date
   updatedAt: Date
@@ -268,7 +257,6 @@ export type ScoreWhereInput = {
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
-  draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
@@ -283,7 +271,6 @@ export type ScoreOrderByWithRelationInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -302,7 +289,6 @@ export type ScoreWhereUniqueInput = Prisma.AtLeast<{
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
-  draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
@@ -317,7 +303,6 @@ export type ScoreOrderByWithAggregationInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -338,7 +323,6 @@ export type ScoreScalarWhereWithAggregatesInput = {
   matches?: Prisma.IntWithAggregatesFilter<"Score"> | number
   wins?: Prisma.IntWithAggregatesFilter<"Score"> | number
   losses?: Prisma.IntWithAggregatesFilter<"Score"> | number
-  draws?: Prisma.IntWithAggregatesFilter<"Score"> | number
   points?: Prisma.IntWithAggregatesFilter<"Score"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
@@ -349,7 +333,6 @@ export type ScoreCreateInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -364,7 +347,6 @@ export type ScoreUncheckedCreateInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -375,7 +357,6 @@ export type ScoreUpdateInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -390,7 +371,6 @@ export type ScoreUncheckedUpdateInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -403,7 +383,6 @@ export type ScoreCreateManyInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -414,7 +393,6 @@ export type ScoreUpdateManyMutationInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,7 +405,6 @@ export type ScoreUncheckedUpdateManyInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -455,7 +432,6 @@ export type ScoreCountOrderByAggregateInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -465,7 +441,6 @@ export type ScoreAvgOrderByAggregateInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
 }
 
@@ -476,7 +451,6 @@ export type ScoreMaxOrderByAggregateInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -489,7 +463,6 @@ export type ScoreMinOrderByAggregateInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -499,7 +472,6 @@ export type ScoreSumOrderByAggregateInput = {
   matches?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
-  draws?: Prisma.SortOrder
   points?: Prisma.SortOrder
 }
 
@@ -604,7 +576,6 @@ export type ScoreCreateWithoutDepartmentInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -617,7 +588,6 @@ export type ScoreUncheckedCreateWithoutDepartmentInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -659,7 +629,6 @@ export type ScoreScalarWhereInput = {
   matches?: Prisma.IntFilter<"Score"> | number
   wins?: Prisma.IntFilter<"Score"> | number
   losses?: Prisma.IntFilter<"Score"> | number
-  draws?: Prisma.IntFilter<"Score"> | number
   points?: Prisma.IntFilter<"Score"> | number
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
@@ -670,7 +639,6 @@ export type ScoreCreateWithoutEventInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -683,7 +651,6 @@ export type ScoreUncheckedCreateWithoutEventInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -721,7 +688,6 @@ export type ScoreCreateManyDepartmentInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -732,7 +698,6 @@ export type ScoreUpdateWithoutDepartmentInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -745,7 +710,6 @@ export type ScoreUncheckedUpdateWithoutDepartmentInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -757,7 +721,6 @@ export type ScoreUncheckedUpdateManyWithoutDepartmentInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -769,7 +732,6 @@ export type ScoreCreateManyEventInput = {
   matches?: number
   wins?: number
   losses?: number
-  draws?: number
   points?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -780,7 +742,6 @@ export type ScoreUpdateWithoutEventInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -793,7 +754,6 @@ export type ScoreUncheckedUpdateWithoutEventInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -805,7 +765,6 @@ export type ScoreUncheckedUpdateManyWithoutEventInput = {
   matches?: Prisma.IntFieldUpdateOperationsInput | number
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
-  draws?: Prisma.IntFieldUpdateOperationsInput | number
   points?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -820,7 +779,6 @@ export type ScoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   matches?: boolean
   wins?: boolean
   losses?: boolean
-  draws?: boolean
   points?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -835,7 +793,6 @@ export type ScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matches?: boolean
   wins?: boolean
   losses?: boolean
-  draws?: boolean
   points?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -850,7 +807,6 @@ export type ScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matches?: boolean
   wins?: boolean
   losses?: boolean
-  draws?: boolean
   points?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -865,13 +821,12 @@ export type ScoreSelectScalar = {
   matches?: boolean
   wins?: boolean
   losses?: boolean
-  draws?: boolean
   points?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "event_id" | "department_id" | "matches" | "wins" | "losses" | "draws" | "points" | "createdAt" | "updatedAt", ExtArgs["result"]["score"]>
+export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "event_id" | "department_id" | "matches" | "wins" | "losses" | "points" | "createdAt" | "updatedAt", ExtArgs["result"]["score"]>
 export type ScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   event?: boolean | Prisma.Sport_eventDefaultArgs<ExtArgs>
   department?: boolean | Prisma.departmentDefaultArgs<ExtArgs>
@@ -898,7 +853,6 @@ export type $ScorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     matches: number
     wins: number
     losses: number
-    draws: number
     points: number
     createdAt: Date
     updatedAt: Date
@@ -1333,7 +1287,6 @@ export interface ScoreFieldRefs {
   readonly matches: Prisma.FieldRef<"Score", 'Int'>
   readonly wins: Prisma.FieldRef<"Score", 'Int'>
   readonly losses: Prisma.FieldRef<"Score", 'Int'>
-  readonly draws: Prisma.FieldRef<"Score", 'Int'>
   readonly points: Prisma.FieldRef<"Score", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Score", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Score", 'DateTime'>

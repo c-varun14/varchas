@@ -27,14 +27,12 @@ const DEPARTMENTS: DepartmentId[] = Object.values(
 type FormState = {
   wins: number;
   losses: number;
-  draws: number;
   points: number;
 };
 
 const DEFAULT_FORM_STATE: FormState = {
   wins: 0,
   losses: 0,
-  draws: 0,
   points: 0,
 };
 
@@ -64,7 +62,6 @@ export default function EditPoints({
     setFormData({
       wins: departmentScore?.wins ?? 0,
       losses: departmentScore?.losses ?? 0,
-      draws: departmentScore?.draws ?? 0,
       points: departmentScore?.points ?? 0,
     });
   };
@@ -90,7 +87,6 @@ export default function EditPoints({
           department_id: selectedDept,
           wins: formData.wins,
           losses: formData.losses,
-          draws: formData.draws,
           points: formData.points,
         }),
       });
@@ -173,22 +169,6 @@ export default function EditPoints({
                   setFormData({
                     ...formData,
                     losses: parseInt(event.target.value) || 0,
-                  })
-                }
-                min="0"
-                disabled={isFormDisabled}
-              />
-            </div>
-            <div>
-              <Label htmlFor="draws">Draws</Label>
-              <Input
-                type="number"
-                id="draws"
-                value={formData.draws}
-                onChange={(event) =>
-                  setFormData({
-                    ...formData,
-                    draws: parseInt(event.target.value) || 0,
                   })
                 }
                 min="0"

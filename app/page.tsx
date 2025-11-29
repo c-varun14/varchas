@@ -14,23 +14,6 @@ const DEPARTMENT_IDS = Object.values(
   DEPARTMENTNAME
 ) as DepartmentScore["department_id"][];
 
-const parseAdditionalData = (payload: unknown): AdditionalDataPayload => {
-  if (!payload || typeof payload !== "object") {
-    return { name: null, value: 0 };
-  }
-
-  const record = payload as Record<string, unknown>;
-  const name =
-    typeof record.name === "string" && record.name.trim().length > 0
-      ? record.name
-      : null;
-  const rawValue = record.value;
-  const value =
-    typeof rawValue === "number" && Number.isFinite(rawValue) ? rawValue : 0;
-
-  return { name, value };
-};
-
 async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
   const rawScores = await prisma.score.findMany({
     select: {
@@ -38,7 +21,6 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
       department_id: true,
       wins: true,
       losses: true,
-      draws: true,
       points: true,
     },
   });
@@ -54,7 +36,6 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
       department_id: departmentId,
       wins: 0,
       losses: 0,
-      draws: 0,
       matches: 0,
       points: 0,
     });
@@ -66,8 +47,7 @@ async function getAggregatedDepartmentScores(): Promise<DepartmentScore[]> {
 
     aggregate.wins += score.wins;
     aggregate.losses += score.losses;
-    aggregate.draws += score.draws;
-    aggregate.matches = aggregate.wins + aggregate.losses + aggregate.draws;
+    aggregate.matches = aggregate.wins + aggregate.losses;
     aggregate.points += score.points;
   });
 

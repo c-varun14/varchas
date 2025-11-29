@@ -81,7 +81,6 @@ export async function POST(
       data: {
         wins,
         losses,
-        draws,
         matches,
         points,
       },

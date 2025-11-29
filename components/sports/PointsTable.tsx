@@ -17,7 +17,6 @@ export type DepartmentScore = {
   department_id: DepartmentId;
   wins: number;
   losses: number;
-  draws: number;
   matches: number;
   points: number;
 };
@@ -66,11 +65,10 @@ const PointsTable = ({ scores }: { scores: DepartmentScore[] }) => {
                   {score.department_id.replace("_", "-")}
                 </TableCell>
                 <TableCell className="text-right">
-                  {score.wins + score.losses + score.draws}
+                  {score.wins + score.losses}
                 </TableCell>
                 <TableCell className="text-right">{score.wins}</TableCell>
                 <TableCell className="text-right">{score.losses}</TableCell>
-                <TableCell className="text-right">{score.draws}</TableCell>
                 <TableCell className="text-right font-bold">
                   {score.points}
                 </TableCell>
