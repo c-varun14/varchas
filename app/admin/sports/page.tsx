@@ -58,17 +58,24 @@ const DEFAULT_FORM_STATE: FormState = {
 
 const toInputValue = (isoString: string | null | undefined) => {
   if (!isoString) return "";
+  // Parse the ISO string as local time (IST)
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) return "";
-  const tzOffset = date.getTimezoneOffset();
-  const localDate = new Date(date.getTime() - tzOffset * 60_000);
-  return localDate.toISOString().slice(0, 16);
+  // Format for datetime-local input (YYYY-MM-DDTHH:mm)
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
 const prettyDateTime = (isoString: string | null) => {
   if (!isoString) return "–";
+  // Parse the ISO string as local time (IST)
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) return "–";
+  // Format as IST time
   return new Intl.DateTimeFormat("en-IN", {
     timeZone: "Asia/Kolkata",
     dateStyle: "medium",
@@ -168,6 +175,12 @@ export default function SportsAdminPage() {
       endTime: toInputValue(sport.endTime),
     });
     setEditingSportId(sport.id);
+
+    // Scroll to the form
+    const formElement = document.getElementById("sports-form");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -190,7 +203,10 @@ export default function SportsAdminPage() {
         </div>
       )}
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
+      <div
+        id="sports-form"
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8"
+      >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             {formTitle}

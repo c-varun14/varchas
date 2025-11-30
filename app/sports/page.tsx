@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Trophy, Calendar, MapPin } from "lucide-react";
+import { BookOpen, Trophy, Calendar } from "lucide-react";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -17,6 +17,7 @@ const RULEBOOK_URL =
   "https://drive.google.com/drive/folders/1NAma7ysVg8qdw2o30ZYpcT-eRCkDKFkn?usp=drive_link";
 
 function formatDateTime(date: Date) {
+  // Format the Date object directly as IST time
   return new Intl.DateTimeFormat("en-IN", {
     timeZone: "Asia/Kolkata",
     dateStyle: "medium",
@@ -55,7 +56,7 @@ export default async function SportsPage() {
 
   return (
     <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
-      <div className="flex flex-col gap-6 border-b border-border pb-10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-6 border-b mb-10 border-border pb-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="max-w-3xl space-y-3">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Sports Events
