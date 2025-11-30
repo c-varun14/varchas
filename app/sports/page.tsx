@@ -8,10 +8,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy } from "lucide-react";
+import { BookOpen, Trophy, Calendar, MapPin } from "lucide-react";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
+
+const RULEBOOK_URL =
+  "https://drive.google.com/drive/folders/1NAma7ysVg8qdw2o30ZYpcT-eRCkDKFkn?usp=drive_link";
+
+function formatDateTime(date: Date) {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
+}
 
 type SportEvent = {
   id: string;
@@ -19,6 +30,9 @@ type SportEvent = {
   gender: string;
   additional_data_name: string;
   solo: boolean;
+  startTime: Date;
+  endTime: Date;
+  venue: string;
 };
 
 function formatSportName(name: string): string {
@@ -31,7 +45,7 @@ function formatSportName(name: string): string {
 
 async function getSports(): Promise<SportEvent[]> {
   const sports = await prisma.sport_event.findMany({
-    orderBy: [{ name: "asc" }, { gender: "asc" }],
+    orderBy: [{ startTime: "asc" }],
   });
   return sports as unknown as SportEvent[];
 }
@@ -41,14 +55,34 @@ export default async function SportsPage() {
 
   return (
     <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
-      <div className="text-center mb-8">
+      <div className="flex flex-col gap-6 border-b border-border pb-10 sm:flex-row sm:items-center sm:justify-between">
+        <div className="max-w-3xl space-y-3">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Sports Events
+          </h1>
+          <p className="text-muted-foreground">
+            Select a sport to view the current standings and points table
+          </p>
+        </div>
+        <Link
+          href={RULEBOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 self-start rounded-full border bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+        >
+          <BookOpen className="h-4 w-4" />
+          View rulebook
+        </Link>
+      </div>
+
+      {/* <div className="text-center mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">
           Sports Events
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Select a sport to view the current standings and points table
+          
         </p>
-      </div>
+      </div> */}
 
       {sports.length === 0 ? (
         <div className="text-center py-12 border rounded-lg bg-muted/20">
@@ -81,13 +115,27 @@ export default async function SportsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span
-                      className={`inline-block w-2 h-2 rounded-full ${
-                        sport.solo ? "bg-amber-500" : "bg-blue-500"
-                      }`}
-                    />
-                    {sport.solo ? "Individual Event" : "Team Event"}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span
+                        className={`inline-block w-2 h-2 rounded-full ${
+                          sport.solo ? "bg-amber-500" : "bg-blue-500"
+                        }`}
+                      />
+                      {sport.solo ? "Individual Event" : "Team Event"}
+                    </div>
+                    {sport.startTime && (
+                      <div className="flex items-start gap-2">
+                        <Calendar className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        <div className="text-sm text-muted-foreground">
+                          <div>{formatDateTime(sport.startTime)}</div>
+                          <div className="text-xs text-muted-foreground">
+                            to
+                          </div>
+                          <div>{formatDateTime(sport.endTime)}</div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">

@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/app/utils/VerifyAdmin";
 
+const formatError = (message: string, status = 400) =>
+  NextResponse.json({ error: message }, { status });
+
+const parseDate = (value: unknown): Date | null => {
+  if (typeof value !== "string" && typeof value !== "number") {
+    return null;
+  }
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
 export async function GET() {
   try {
     const sports = await prisma.sport_event.findMany({
@@ -23,23 +34,33 @@ export async function POST(request: Request) {
     const isAuthorized = await verifyAdmin("sports");
     if (!isAuthorized)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    const body = await request.json();
-    const gender = typeof body?.gender === "string" ? body.gender : "";
 
+    const body = await request.json();
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const gender = typeof body.gender === "string" ? body.gender : "";
+    const venue = typeof body.venue === "string" ? body.venue.trim() : "";
     const solo = Boolean(body?.solo);
 
-    if (!body.name || !gender) {
-      return NextResponse.json(
-        { error: "Name, gender and deciding factor are required" },
-        { status: 400 }
+    const start = parseDate(body.startTime);
+    const end = parseDate(body.endTime);
+
+    if (!name || !gender || !venue || !start || !end) {
+      return formatError(
+        "Name, gender, venue, start time and end time are required for sports events"
       );
+    }
+
+    if (start >= end) {
+      return formatError("Start time must be before end time");
     }
 
     const sport = await prisma.sport_event.create({
       data: {
-        name: body.name,
-        gender: gender,
+        name,
+        gender,
         solo,
+        startTime: start,
+        endTime: end,
       },
     });
 
@@ -68,5 +89,61 @@ export async function POST(request: Request) {
       { error: "Failed to create sport" },
       { status: 500 }
     );
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const isAuthorized = await verifyAdmin("sports");
+    if (!isAuthorized) {
+      return formatError("Unauthorized", 401);
+    }
+
+    const body = await request.json();
+    const id = typeof body.id === "string" ? body.id.trim() : "";
+
+    if (!id) {
+      return formatError("Sport id is required for updates");
+    }
+
+    const existing = await prisma.sport_event.findUnique({ where: { id } });
+    if (!existing) {
+      return formatError("Sport not found", 404);
+    }
+
+    const name =
+      typeof body.name === "string" ? body.name.trim() : existing.name;
+    const gender =
+      typeof body.gender === "string" ? body.gender : existing.gender;
+    const solo = typeof body.solo === "boolean" ? body.solo : existing.solo;
+
+    const start = body.startTime
+      ? parseDate(body.startTime)
+      : existing.startTime;
+    const end = body.endTime ? parseDate(body.endTime) : existing.endTime;
+
+    if (!start || !end) {
+      return formatError("Invalid start or end time");
+    }
+
+    if (start >= end) {
+      return formatError("Start time must be before end time");
+    }
+
+    const updated = await prisma.sport_event.update({
+      where: { id },
+      data: {
+        name,
+        gender,
+        solo,
+        startTime: start,
+        endTime: end,
+      },
+    });
+
+    return NextResponse.json(updated);
+  } catch (error) {
+    console.error("Error updating sport:", error);
+    return formatError("Failed to update sport", 500);
   }
 }

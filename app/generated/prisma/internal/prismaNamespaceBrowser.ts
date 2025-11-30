@@ -90,7 +90,9 @@ export const Sport_eventScalarFieldEnum = {
   id: 'id',
   name: 'name',
   solo: 'solo',
-  gender: 'gender'
+  gender: 'gender',
+  startTime: 'startTime',
+  endTime: 'endTime'
 } as const
 
 export type Sport_eventScalarFieldEnum = (typeof Sport_eventScalarFieldEnum)[keyof typeof Sport_eventScalarFieldEnum]

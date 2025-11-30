@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertCircle, Loader2, Eye, Trash2, Users } from "lucide-react";
+import {
+  AlertCircle,
+  Loader2,
+  Eye,
+  Users,
+  Calendar,
+  MapPin,
+} from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -19,9 +29,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 type SportEvent = {
   id: string;
@@ -29,17 +36,61 @@ type SportEvent = {
   gender: string;
   additional_data_name: string;
   solo: boolean;
+  startTime: string | null;
+  endTime: string | null;
+};
+
+type FormState = {
+  name: string;
+  gender: string;
+  solo: boolean;
+  startTime: string;
+  endTime: string;
+};
+
+const DEFAULT_FORM_STATE: FormState = {
+  name: "",
+  gender: "",
+  solo: false,
+  startTime: "",
+  endTime: "",
+};
+
+const toInputValue = (isoString: string | null | undefined) => {
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return "";
+  const tzOffset = date.getTimezoneOffset();
+  const localDate = new Date(date.getTime() - tzOffset * 60_000);
+  return localDate.toISOString().slice(0, 16);
+};
+
+const prettyDateTime = (isoString: string | null) => {
+  if (!isoString) return "–";
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return "–";
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
 };
 
 export default function SportsAdminPage() {
   const [sports, setSports] = useState<SportEvent[]>([]);
-  const [newSport, setNewSport] = useState<{
-    name: string;
-    gender: string;
-    solo: boolean;
-  }>({ name: "", gender: "", solo: false });
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<FormState>(DEFAULT_FORM_STATE);
+  const [editingSportId, setEditingSportId] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isEditing = editingSportId !== null;
+  const formTitle = isEditing ? "Update sport event" : "Add new sport event";
+  const submitCta = isEditing ? "Update event" : "Create event";
+
+  const resetForm = () => {
+    setFormData(DEFAULT_FORM_STATE);
+    setEditingSportId(null);
+  };
 
   const fetchSports = async () => {
     try {
@@ -58,40 +109,65 @@ export default function SportsAdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newSport.name || !newSport.gender) {
+    if (
+      !formData.name ||
+      !formData.gender ||
+      !formData.startTime ||
+      !formData.endTime
+    ) {
       setError("Please fill in all fields");
       return;
     }
 
-    setLoading(true);
+    const start = new Date(formData.startTime);
+    const end = new Date(formData.endTime);
+    if (start >= end) {
+      setError("Start time must be before end time");
+      return;
+    }
+
+    setSubmitting(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/admin/sports", {
-        method: "POST",
+      const url = isEditing ? "/api/admin/sports" : "/api/admin/sports";
+      const method = isEditing ? "PATCH" : "POST";
+      const payload = isEditing
+        ? { ...formData, id: editingSportId }
+        : formData;
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newSport),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to add sport");
+        throw new Error(
+          isEditing ? "Failed to update sport" : "Failed to add sport"
+        );
       }
 
-      // Refresh the list
       await fetchSports();
-      // Reset form
-      setNewSport({
-        name: "",
-        gender: "",
-        solo: false,
-      });
+      resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to add sport");
+      setError(err instanceof Error ? err.message : "Failed to save sport");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
+  };
+
+  const handleEdit = (sport: SportEvent) => {
+    setFormData({
+      name: sport.name || "",
+      gender: sport.gender || "",
+      solo: sport.solo || false,
+      startTime: toInputValue(sport.startTime),
+      endTime: toInputValue(sport.endTime),
+    });
+    setEditingSportId(sport.id);
   };
 
   return (
@@ -109,7 +185,7 @@ export default function SportsAdminPage() {
 
       {error && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg mb-6 flex items-start">
-          <AlertCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+          <AlertCircle className="h-5 w-5 mr-2 mt-0.5 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -117,7 +193,7 @@ export default function SportsAdminPage() {
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Add New Sport
+            {formTitle}
           </h2>
           <span className="text-sm text-gray-500 dark:text-gray-400">
             {sports.length} sports configured
@@ -136,9 +212,9 @@ export default function SportsAdminPage() {
               <Input
                 id="sport"
                 placeholder="Enter sport name"
-                value={newSport.name}
+                value={formData.name}
                 onChange={(e) =>
-                  setNewSport({ ...newSport, name: e.target.value })
+                  setFormData({ ...formData, name: e.target.value })
                 }
                 className="h-10"
                 autoComplete="off"
@@ -153,9 +229,9 @@ export default function SportsAdminPage() {
                 Gender
               </Label>
               <Select
-                value={newSport.gender}
+                value={formData.gender}
                 onValueChange={(value) =>
-                  setNewSport({ ...newSport, gender: value })
+                  setFormData({ ...formData, gender: value })
                 }
               >
                 <SelectTrigger className="h-10">
@@ -168,14 +244,50 @@ export default function SportsAdminPage() {
               </Select>
             </div>
 
+            <div className="space-y-2">
+              <Label
+                htmlFor="startTime"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Start Time
+              </Label>
+              <Input
+                id="startTime"
+                type="datetime-local"
+                value={formData.startTime}
+                onChange={(e) =>
+                  setFormData({ ...formData, startTime: e.target.value })
+                }
+                className="h-10"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label
+                htmlFor="endTime"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                End Time
+              </Label>
+              <Input
+                id="endTime"
+                type="datetime-local"
+                value={formData.endTime}
+                onChange={(e) =>
+                  setFormData({ ...formData, endTime: e.target.value })
+                }
+                className="h-10"
+              />
+            </div>
+
             <div className="flex items-center space-x-2 p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
               <div className="flex items-center h-5">
                 <input
                   type="checkbox"
                   id="solo"
-                  checked={newSport.solo}
+                  checked={formData.solo}
                   onChange={(e) =>
-                    setNewSport({ ...newSport, solo: e.target.checked })
+                    setFormData({ ...formData, solo: e.target.checked })
                   }
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700"
                 />
@@ -188,7 +300,7 @@ export default function SportsAdminPage() {
                   Solo Event
                 </Label>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {newSport.solo
+                  {formData.solo
                     ? "Individual participation"
                     : "Team-based participation"}
                 </p>
@@ -196,19 +308,36 @@ export default function SportsAdminPage() {
             </div>
           </div>
 
-          <div className="flex justify-end pt-2">
+          <div className="flex justify-end pt-2 gap-2">
+            {isEditing && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={resetForm}
+                disabled={submitting}
+                className="w-full sm:w-auto"
+              >
+                Cancel
+              </Button>
+            )}
             <Button
               type="submit"
-              disabled={loading || !newSport.name || !newSport.gender}
+              disabled={
+                submitting ||
+                !formData.name ||
+                !formData.gender ||
+                !formData.startTime ||
+                !formData.endTime
+              }
               className="w-full sm:w-auto"
             >
-              {loading ? (
+              {submitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Adding...
+                  {isEditing ? "Updating..." : "Adding..."}
                 </>
               ) : (
-                "Add Sport"
+                submitCta
               )}
             </Button>
           </div>
@@ -262,30 +391,50 @@ export default function SportsAdminPage() {
                         {sport.solo ? "Solo" : "Team"}
                       </Badge>
                     </div>
+                    {sport.startTime && (
+                      <div className="flex items-start gap-2">
+                        <Calendar className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" />
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          <div>{prettyDateTime(sport.startTime)}</div>
+                          <div className="text-xs text-gray-500">to</div>
+                          <div>{prettyDateTime(sport.endTime)}</div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter className="bg-gray-50 dark:bg-gray-800/50 p-3 border-t border-gray-100 dark:border-gray-700">
-                  <div className="flex flex-col justify-between w-full space-x-2">
-                    <Link
-                      href={`/admin/sports/${sport.id}/points`}
-                      className={cn(
-                        buttonVariants({ variant: "outline" }),
-                        "flex items-center justify-center"
-                      )}
+                  <div className="flex flex-col gap-2 w-full">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEdit(sport)}
+                      className="w-full"
                     >
-                      <Eye className="h-4 w-4 mr-2" />
-                      Edit leaderboard
-                    </Link>
-                    <Link
-                      href={`/admin/sports/${sport.id}/fixtures`}
-                      className={cn(
-                        buttonVariants({ variant: "default" }),
-                        "flex items-center justify-center mt-2"
-                      )}
-                    >
-                      <Eye className="h-4 w-4 mr-2" />
-                      Edit fixtures
-                    </Link>
+                      Edit Event
+                    </Button>
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/admin/sports/${sport.id}/points`}
+                        className={cn(
+                          buttonVariants({ variant: "outline", size: "sm" }),
+                          "flex items-center justify-center flex-1"
+                        )}
+                      >
+                        <Eye className="h-4 w-4 mr-1" />
+                        Points
+                      </Link>
+                      <Link
+                        href={`/admin/sports/${sport.id}/fixtures`}
+                        className={cn(
+                          buttonVariants({ variant: "default", size: "sm" }),
+                          "flex items-center justify-center flex-1"
+                        )}
+                      >
+                        <Eye className="h-4 w-4 mr-1" />
+                        Fixtures
+                      </Link>
+                    </div>
                   </div>
                 </CardFooter>
               </Card>

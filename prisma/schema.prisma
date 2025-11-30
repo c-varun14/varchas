@@ -41,6 +41,8 @@ model Sport_event {
   name                 String
   solo                 Boolean   @default(false)
   gender               Gender
+  startTime   DateTime?
+  endTime   DateTime?
   scores               Score[]
   fixtures             fixture[]
 }

@@ -7,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
-const RULEBOOK_URL = "/cultural-rulebook.pdf";
+const RULEBOOK_URL =
+  "https://drive.google.com/drive/folders/1NAma7ysVg8qdw2o30ZYpcT-eRCkDKFkn?usp=drive_link";
 
 function formatDateTime(date: Date) {
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
     dateStyle: "medium",
     timeStyle: "short",
   }).format(date);
