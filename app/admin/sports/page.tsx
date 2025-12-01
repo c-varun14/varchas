@@ -76,10 +76,10 @@ const prettyDateTime = (isoString: string | null) => {
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) return "–";
   // Format as IST time
-  return new Intl.DateTimeFormat("en-IN", {
-    timeZone: "Asia/Kolkata",
+  return new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
     timeStyle: "short",
+    timeZone: "UTC",
   }).format(date);
 };
 

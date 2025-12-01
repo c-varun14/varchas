@@ -18,10 +18,10 @@ const RULEBOOK_URL =
 
 function formatDateTime(date: Date) {
   // Format the Date object directly as IST time
-  return new Intl.DateTimeFormat("en-IN", {
-    timeZone: "Asia/Kolkata",
+  return new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
     timeStyle: "short",
+    timeZone: "UTC", // enforce UTC timezone
   }).format(date);
 }
 
@@ -53,6 +53,8 @@ async function getSports(): Promise<SportEvent[]> {
 
 export default async function SportsPage() {
   const sports = await getSports();
+
+  console.log(sports[0].startTime);
 
   return (
     <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
