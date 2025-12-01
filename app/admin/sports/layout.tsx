@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Varchas Admin page",
+  title: "Interdepartment championship Sports Admin page",
   description:
-    "The official website of Varchas 2025. Varchas is the annual inter-department sports and cultural competition of MVJCE.",
+    "The official website of Interdepartment championship 2025. Interdepartment championship is the annual inter-department sports and cultural competition of MVJCE.",
 };
 
 export default async function RootLayout({

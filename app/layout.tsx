@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Varchas 2025",
+  title: "Interdepartment Championship MVJCE",
   description:
-    "The official website of Varchas 2025. Varchas is the annual inter-department sports and cultural competition of MVJCE.",
+    "The official website of Interdepartment Championship MVJCE 2025. Interdepartment Championship is the annual inter-department sports and cultural competition of MVJCE.",
 };
 
 export const revalidate = 0;
