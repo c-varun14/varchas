@@ -4,8 +4,8 @@ import { BookOpen, Calendar, MapPin, Users } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
 
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+// export const dynamic = "force-dynamic";
 
 const RULEBOOK_URL =
   "https://drive.google.com/drive/folders/1NAma7ysVg8qdw2o30ZYpcT-eRCkDKFkn?usp=drive_link";

@@ -5,8 +5,8 @@ import { Calendar, MapPin, ArrowLeft, Users, Award } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
 
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+// export const dynamic = "force-dynamic";
 
 type CulturalWinnerRow = {
   id: string;

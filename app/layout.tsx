@@ -18,11 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Interdepartment Championship MVJCE",
   description:
-    "The official website of Interdepartment Championship MVJCE 2025. Interdepartment Championship is the annual inter-department sports and cultural competition of MVJCE.",
+    "The official website of Interdepartment championship 2025 website of MVJCE.",
 };
 
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default function RootLayout({
   children,

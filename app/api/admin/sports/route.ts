@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { verifyAdmin } from "@/app/utils/VerifyAdmin";
+import { verifyAdmin } from "@/utils/VerifyAdmin";
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });

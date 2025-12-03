@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import PointsTable, { type DepartmentScore } from "./PointsTable";
-import { DEPARTMENTNAMES } from "@/app/utils/DEPARTMENTS";
+import { DEPARTMENTNAMES } from "@/utils/DEPARTMENTS";
 
 type FormState = {
   wins: number;

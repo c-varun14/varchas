@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { DEPARTMENTNAMES } from "@/app/utils/DEPARTMENTS";
+import { DEPARTMENTNAMES } from "@/utils/DEPARTMENTS";
 
 export type CulturalWinnerDTO = {
   id: string;

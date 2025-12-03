@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { verifyAdmin } from "@/app/utils/VerifyAdmin";
+import { verifyAdmin } from "@/utils/VerifyAdmin";
 
 const parseNumber = (value: unknown, fallback = 0): number => {
   if (typeof value === "number" && Number.isFinite(value)) return value;
