@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import type { Prisma } from "@/app/generated/prisma/client";
 import { verifyAdmin } from "@/utils/VerifyAdmin";
+import { revalidatePath } from "next/cache";
 
 const fixtureDelegate = prisma.fixture as Prisma.fixtureDelegate;
 
@@ -89,6 +90,8 @@ export async function POST(
       },
     });
 
+    revalidatePath(`/sports/${sportsId}`);
+
     return NextResponse.json(fixture, { status: 201 });
   } catch (error) {
     console.error("Error creating fixture:", error);
@@ -173,6 +176,8 @@ export async function PATCH(
       data: updateData,
     });
 
+    revalidatePath(`/sports/${sportsId}`);
+
     return NextResponse.json(updated);
   } catch (error) {
     console.error("Error updating fixture:", error);
@@ -203,6 +208,8 @@ export async function DELETE(
     }
 
     await fixtureDelegate.delete({ where: { id } });
+
+    revalidatePath(`/sports/${sportsId}`);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/utils/VerifyAdmin";
+import { revalidatePath } from "next/cache";
 
 const parseNumber = (value: unknown, fallback = 0): number => {
   if (typeof value === "number" && Number.isFinite(value)) return value;
@@ -74,6 +75,9 @@ export async function POST(
       },
       orderBy: [{ points: "desc" }, { wins: "desc" }, { createdAt: "asc" }],
     });
+
+    revalidatePath("/");
+    revalidatePath(`/sports/${sportsId}`);
 
     return NextResponse.json(scores);
   } catch (error) {

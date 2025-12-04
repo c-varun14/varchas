@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/utils/VerifyAdmin";
+import { revalidatePath } from "next/cache";
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });
@@ -73,6 +74,8 @@ export async function POST(request: Request) {
         solo,
       },
     });
+    revalidatePath(`/cultural`);
+    revalidatePath(`/cultural/${event.id}`);
 
     return NextResponse.json(event, { status: 201 });
   } catch (error) {
@@ -169,6 +172,8 @@ export async function PATCH(request: Request) {
       where: { id },
       data: updateData,
     });
+
+    revalidatePath(`/cultural`);
 
     return NextResponse.json(updated);
   } catch (error) {

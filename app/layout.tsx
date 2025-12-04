@@ -22,8 +22,6 @@ export const metadata: Metadata = {
     "The official website of Interdepartment championship 2025 website of MVJCE.",
 };
 
-export const revalidate = 3600;
-
 export default function RootLayout({
   children,
 }: Readonly<{

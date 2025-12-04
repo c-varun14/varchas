@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/utils/VerifyAdmin";
+import { revalidatePath } from "next/cache";
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });
@@ -68,6 +69,9 @@ export async function POST(
         points: pointsRaw,
       },
     });
+
+    revalidatePath(`/cultural`);
+    revalidatePath(`/cultural/${winner.eventId}`);
 
     return NextResponse.json(winner, { status: 201 });
   } catch (error) {
@@ -140,6 +144,9 @@ export async function PATCH(
       data: updateData,
     });
 
+    revalidatePath(`/cultural`);
+    revalidatePath(`/cultural/${updated.eventId}`);
+
     return NextResponse.json(updated);
   } catch (error) {
     console.error("Error updating cultural winner:", error);
@@ -183,6 +190,9 @@ export async function DELETE(
         id,
       },
     });
+
+    revalidatePath(`/cultural`);
+    revalidatePath(`/cultural/${existing.eventId}`);
 
     return NextResponse.json({ success: true });
   } catch (error) {

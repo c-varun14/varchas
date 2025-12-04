@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/utils/VerifyAdmin";
+import { revalidatePath } from "next/cache";
 
 const formatError = (message: string, status = 400) =>
   NextResponse.json({ error: message }, { status });
@@ -82,6 +83,9 @@ export async function POST(request: Request) {
       )
     );
 
+    revalidatePath("/sports");
+    revalidatePath(`/sports/${sport.id}`);
+
     return NextResponse.json(sport, { status: 201 });
   } catch (error) {
     console.error("Error creating sport:", error);
@@ -140,6 +144,8 @@ export async function PATCH(request: Request) {
         endTime: end,
       },
     });
+
+    revalidatePath("/sports");
 
     return NextResponse.json(updated);
   } catch (error) {

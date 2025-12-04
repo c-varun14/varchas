@@ -15,9 +15,6 @@ import {
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
-
 type FixtureDTO = {
   id: string;
   department_1: string;
