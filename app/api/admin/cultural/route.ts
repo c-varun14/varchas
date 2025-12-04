@@ -174,6 +174,7 @@ export async function PATCH(request: Request) {
     });
 
     revalidatePath(`/cultural`);
+    revalidatePath(`/cultural/${updated.id}`);
 
     return NextResponse.json(updated);
   } catch (error) {

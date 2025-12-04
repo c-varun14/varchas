@@ -191,6 +191,7 @@ export async function DELETE(
       },
     });
 
+    revalidatePath(`/`);
     revalidatePath(`/cultural`);
     revalidatePath(`/cultural/${existing.eventId}`);
 
