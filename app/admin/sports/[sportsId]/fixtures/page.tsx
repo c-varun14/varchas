@@ -7,8 +7,8 @@ type FixturesPageProps = {
   params: Promise<{ sportsId: string }>;
 };
 
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
+export const revalidate = 1800;
+// export const dynamic = "force-dynamic";
 
 async function getFixtures(sportsId: string) {
   const fixtures = await prisma.fixture.findMany({
