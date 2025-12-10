@@ -14,4 +14,5 @@ export const DEPARTMENTNAMES = [
   "ISE",
   "ME",
   "P-CYCLE",
+  "MBA",
 ];

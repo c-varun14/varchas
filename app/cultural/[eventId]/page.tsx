@@ -5,6 +5,8 @@ import { Calendar, MapPin, ArrowLeft, Users, Award } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
 
+export const dynamic = "force-static";
+
 type CulturalWinnerRow = {
   id: string;
   position: number;
