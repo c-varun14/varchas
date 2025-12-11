@@ -70,6 +70,7 @@ export async function POST(
       },
     });
 
+    revalidatePath(`/`);
     revalidatePath(`/cultural`);
     revalidatePath(`/cultural/${winner.eventId}`);
 
@@ -144,6 +145,7 @@ export async function PATCH(
       data: updateData,
     });
 
+    revalidatePath(`/`);
     revalidatePath(`/cultural`);
     revalidatePath(`/cultural/${updated.eventId}`);
 
