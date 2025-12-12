@@ -39,13 +39,12 @@ export async function POST(request: Request) {
     const body = await request.json();
     const name = typeof body.name === "string" ? body.name.trim() : "";
     const gender = typeof body.gender === "string" ? body.gender : "";
-    const venue = typeof body.venue === "string" ? body.venue.trim() : "";
     const solo = Boolean(body?.solo);
 
     const start = parseDate(body.startTime);
     const end = parseDate(body.endTime);
 
-    if (!name || !gender || !venue || !start || !end) {
+    if (!name || !gender || !start || !end) {
       return formatError(
         "Name, gender, venue, start time and end time are required for sports events"
       );
